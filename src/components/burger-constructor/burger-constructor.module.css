@@ -1,0 +1,19 @@
+.top{
+    justify-content: end;
+    display: flex;
+
+}
+
+.item {
+    justify-content: end;
+    display: flex; 
+    list-style-type: none;
+    align-items: center;
+    padding-top: 16px;
+}
+
+.bottom{
+    justify-content: end;
+    display: flex;
+    padding-top: 16px;
+}

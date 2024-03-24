@@ -1,0 +1,9 @@
+.currency{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter {
+    position: relative;
+}

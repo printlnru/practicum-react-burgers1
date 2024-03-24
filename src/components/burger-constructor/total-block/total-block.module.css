@@ -1,0 +1,6 @@
+.order {
+    display: flex;
+    justify-content: flex-end;
+    margin: 40px 16px 0 0;
+    align-items: center;
+}
