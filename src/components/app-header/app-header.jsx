@@ -6,7 +6,7 @@ import style from './app-header.module.css';
 export default function AppHeader() {
 
     return (
-        <div className={style.app_header_center}>
+        <header className={style.app_header_center}>
             <nav className={style.app_header}>
 
                 <div className={style.col1}>
@@ -29,6 +29,6 @@ export default function AppHeader() {
                     </a>
                 </div>
             </nav >
-        </div>
+        </header>
     )
 }
