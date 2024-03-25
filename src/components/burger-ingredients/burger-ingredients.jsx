@@ -14,24 +14,21 @@ import IngridientDetails from '../ingredient-details/ingredient-details';
 import ingredientType from "../../utils/types";
 
 
-export default function BurgerIngredients({allIngredients}) {
+export default function BurgerIngredients({ allIngredients }) {
 
-    const [visibleModal, setVisibleModal] = React.useState({visible: false, item: null});
+    const [visibleModal, setVisibleModal] = React.useState({ visible: false, item: null });
 
     const onClickTab = (value) => {
-        console.log(value);
-        //Scroll to value here
+        //TODO Scroll to value here
     }
 
     const closeModalHandle = () => {
-        console.log("fire closeModalHandle");
-        setVisibleModal({...visibleModal, visible: false, item: null});
+        setVisibleModal({ ...visibleModal, visible: false, item: null });
     }
 
     const showModal = (e) => {
-        setVisibleModal({...visibleModal, visible: true, item: e})
-        console.log(e)
-      }
+        setVisibleModal({ ...visibleModal, visible: true, item: e })
+    }
 
     const { visible, item } = visibleModal
 
@@ -46,7 +43,6 @@ export default function BurgerIngredients({allIngredients}) {
                 <Tab value="filling" onClick={onClickTab}>Начинки</Tab>
             </div>
             {/* TODO не понятно как сделать скролл как в макете */}
-            {/* {console.log(props)} */}
             <div className={style.ingredients}>
                 <GroupIngredients selectedHandler={showModal} title="Булки" elements={allIngredients.filter(element => element.type === "bun")} />
                 <GroupIngredients selectedHandler={showModal} title="Соусы" elements={allIngredients.filter(element => element.type === "sauce")} />
@@ -57,25 +53,6 @@ export default function BurgerIngredients({allIngredients}) {
                 <Modal header='Детали ингредиента' onCloseHandle={closeModalHandle}>
                     <IngridientDetails data={item} />
                 </Modal>}
-
-            {/* {
-                    this.props.data && this.props.data.filter(element => element.type === "bun").map(
-                        (element) => (<GroupIngredients key={element.id} element={element} />)
-                    )
-                }
-
-                {
-                    this.props.data && this.props.data.filter(element => element.type === "sauce").map(
-                        (element) => (<GroupIngredients key={element.id} element={element} />)
-                    )
-                }
-
-                {
-                    this.props.data && this.props.data.filter(element => element.type === "main").map(
-                        (element) => (<GroupIngredients key={element.id} element={element} />)
-                    )
-                } */}
-
         </>
     )
 }
