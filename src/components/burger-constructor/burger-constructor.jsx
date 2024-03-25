@@ -31,6 +31,8 @@ export default function BurgerConstructor() {
                 </li>
 
 
+{/* Для отрисовки однотипной верстки принято использовать массив и его метод map, чтобы не дублировать код. И обязательно нужно добавлять уникальный атрибут key при этом. */}
+{/* если комментарий про это, то при реализации функционала так и планируется сделать. в данном случае этот код временный для того чтобы посмотреть как это выглядит */}
 <li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
 <li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
 <li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
