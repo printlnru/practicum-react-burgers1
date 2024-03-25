@@ -17,5 +17,5 @@ import style from './order-details.module.css';
 
 
 OrderDetails.propTypes = {
-    order: PropTypes.number.isRequired
+    order: PropTypes.string.isRequired
 }

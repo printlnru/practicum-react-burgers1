@@ -28,7 +28,7 @@ export default function TotalBlock() {
 
             {visibleModal &&
                 <Modal onCloseHandle={closeModalHandle}>
-                    <OrderDetails order='034536' />
+                    <OrderDetails order={'034536'} />
                 </Modal>}
 
         </div>

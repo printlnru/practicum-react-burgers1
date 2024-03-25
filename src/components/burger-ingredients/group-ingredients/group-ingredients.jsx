@@ -1,6 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 import ItemIngredient from './item-ingredient/item-ingredient'
+
+import ingredientType from "../../../utils/types";
 
 export default function GroupIngredients({title, elements, selectedHandler}) {
 
@@ -21,3 +24,8 @@ export default function GroupIngredients({title, elements, selectedHandler}) {
     )
 }
 
+GroupIngredients.propTypes = {
+    title: PropTypes.string.isRequired,
+    elements: PropTypes.arrayOf(ingredientType.isRequired),
+    selectedHandler: PropTypes.func.isRequired
+}
