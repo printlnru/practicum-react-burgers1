@@ -22,7 +22,7 @@ export default function BurgerConstructor() {
 
                 {/* filling (with scroll) */}
                 {/* не понятно как сделать скролл как в макете */}
-                <ul style={{margin: '0px', padding: '0px', overflowY: 'auto', height: 'calc(100vh - 570px)', width: '620px'}}>
+                <ul className={style.ulstyle}>
                 <li className={style.item}>
                     <DragIcon type="primary"/>
                     <ConstructorElement text="Соус традиционный галактический"

@@ -20,8 +20,9 @@
 }
 
 .head {
-    width: 720px;
-    align-self: flex-start;
+    width: 640px;
+    /* align-self: flex-start; */
+    display: flex;
 }
 
 .close {
@@ -38,3 +39,4 @@
     height: 24px;
     cursor: pointer;
 }
+

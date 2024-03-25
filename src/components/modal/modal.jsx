@@ -25,7 +25,7 @@ export default function Modal({ onCloseHandle, children, header }) {
         <>
             <div className={style.modal}>
                 <div className={style.component}>
-                    <div style={{ width: '640px', display: 'flex' }}>
+                    <div className={style.head}>
                         <span className="text text_type_main-large pt-10">{header}</span>
                     </div>
                     <button onClick={() => onCloseHandle()} className={style.close}>

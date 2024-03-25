@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
+import style from './burger-ingredients.module.css';
+
 import GroupIngredients from './group-ingredients/group-ingredients'
 
 
@@ -35,17 +37,17 @@ export default function BurgerIngredients({allIngredients}) {
 
     return (
         <>
-            <div style={{ textAlign: 'left' }}>
+            <div className={style.textleft}>
                 <span className="text text_type_main-large">Соберите бургер</span>
             </div>
-            <div style={{ display: 'flex' }}>
+            <div className={style.tabs}>
                 <Tab value="bread" active onClick={onClickTab}>Булки</Tab>
                 <Tab value="sauces" onClick={onClickTab}>Соусы</Tab>
                 <Tab value="filling" onClick={onClickTab}>Начинки</Tab>
             </div>
             {/* TODO не понятно как сделать скролл как в макете */}
             {/* {console.log(props)} */}
-            <div style={{ overflowY: 'auto', height: 'calc(100vh - 170px)', width: '620px' }}>
+            <div className={style.ingredients}>
                 <GroupIngredients selectedHandler={showModal} title="Булки" elements={allIngredients.filter(element => element.type === "bun")} />
                 <GroupIngredients selectedHandler={showModal} title="Соусы" elements={allIngredients.filter(element => element.type === "sauce")} />
                 <GroupIngredients selectedHandler={showModal} title="Начинки" elements={allIngredients.filter(element => element.type === "main")} />

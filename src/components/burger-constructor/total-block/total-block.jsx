@@ -23,7 +23,8 @@ export default function TotalBlock() {
     return (
         <div className={style.order}>
             <span className="text text_type_digits-medium">610</span>
-            <div className='ml-2' style={{ width: '36px', height: '36px', alignItems: 'center', display: 'flex', overflow: 'visible' }}><CurrencyIcon type="primary" width="36" height="36" /></div>
+
+            <div className={style.currencyicon} ><CurrencyIcon type="primary" /></div>
             <Button onClick={onClickBtn} htmlType="button" type="primary" size="large" extraClass="ml-10">Оформить заказ</Button>
 
             {visibleModal &&
