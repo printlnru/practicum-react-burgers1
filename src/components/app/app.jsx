@@ -26,7 +26,11 @@ export default function App() {
   const getData = () => {
     setState({ ...state, hasError: false, isLoading: true });
     fetch(API_BASE_PATH + INGREDIENTS_METHOD_NAME)
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok)
+          return res.json()
+        else return Promise.reject(`Error! Status code = ${res.status}`);
+      })
       .then(data => setState({ ...state, data: data, isLoading: false }))
       .catch(e => {
         setState({ ...state, hasError: true, isLoading: false });
@@ -39,6 +43,7 @@ export default function App() {
     <>
       {isLoading && 'Загрузка...'}
       {hasError && 'Произошла ошибка'}
+
       {!isLoading &&
         !hasError &&
         data &&
