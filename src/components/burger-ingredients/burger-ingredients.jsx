@@ -9,6 +9,8 @@ import GroupIngredients from './group-ingredients/group-ingredients'
 import Modal from '../modal/modal';
 import IngridientDetails from '../ingredient-details/ingredient-details';
 
+import ingredientType from "../../utils/types";
+
 
 export default function BurgerIngredients({allIngredients}) {
 
@@ -76,23 +78,6 @@ export default function BurgerIngredients({allIngredients}) {
     )
 }
 
-const ingridientType = PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    __v: PropTypes.number.isRequired,
-});
-
-
 BurgerIngredients.propTypes = {
-    allIngredients: PropTypes.arrayOf(ingridientType.isRequired)
-   
+    allIngredients: PropTypes.arrayOf(ingredientType.isRequired)
 }

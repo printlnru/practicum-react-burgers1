@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import style from "./ingredient-details.module.css";
+import ingredientType from "../../utils/types";
 
 export default function IngridientDetails({ data }) {
 
@@ -30,21 +31,7 @@ export default function IngridientDetails({ data }) {
     )
 }
 
-const pTypes = PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-
-    image: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired, // or enum ?
-})
 
 IngridientDetails.propTypes = {
-    data: pTypes.isRequired
+    data: ingredientType.isRequired
 }
