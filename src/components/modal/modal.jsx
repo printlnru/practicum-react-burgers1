@@ -13,13 +13,12 @@ export default function Modal({ onCloseHandle, children, header }) {
 
     React.useEffect(() => {
         const close = (e) => {
-          if(e.keyCode === 27){
-            onCloseHandle()
-          }
+            if (e.key === "Escape")
+                onCloseHandle()
         }
         window.addEventListener('keydown', close)
-      return () => window.removeEventListener('keydown', close)
-    },[])
+        return () => window.removeEventListener('keydown', close)
+    }, [])
 
     return createPortal(
         <>
