@@ -1,13 +1,35 @@
-.currency{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 
 .counter {
     position: relative;
 }
 
-.textcenter{
+.textcenter {
     text-align: center
+}
+
+.item {
+    /* 'm-3' */
+    margin: 12px;
+    display: grid;
+    width: 272px;
+    cursor: pointer;
+}
+
+.currencyContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4px;
+}
+
+.currency {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.name {
+    text-align: center;
+    padding-top: 4px;
 }

@@ -3,3 +3,13 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 12px;
+    padding-left: 4px;
+    padding-bottom: 12px;
+    /* 'pt-3 pl-1 pb-3' */
+}

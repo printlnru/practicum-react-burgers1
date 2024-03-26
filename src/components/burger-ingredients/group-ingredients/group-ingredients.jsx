@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ItemIngredient from './item-ingredient/item-ingredient'
 
 import ingredientType from "../../../utils/types";
+import style from './group-ingredients.module.css';
 
 export default function GroupIngredients({title, elements, selectedHandler}) {
 
@@ -12,7 +13,7 @@ export default function GroupIngredients({title, elements, selectedHandler}) {
             <div className='pt-10'>
                 <span className="text text_type_main-medium"> {title}</span>
             </div>
-            <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}} className='pt-3 pl-1 pb-3'>
+            <div className={style.container}>
                 {
                     elements.map(
                         // TODO count for demo
