@@ -1,0 +1,17 @@
+.order {
+    display: flex;
+    justify-content: flex-end;
+    margin: 40px 16px 0 0;
+    align-items: center;
+}
+
+
+
+.currencyicon {
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    display: flex;
+    overflow: visible;
+    margin-left: 8px;
+}

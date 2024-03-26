@@ -1,0 +1,42 @@
+
+.app_header_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1300px;
+}
+
+.app_header {
+    display: grid;
+    /* grid-template-columns: 1fr 290px 1fr; */
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 1280px;
+    text-align: center;
+    min-width: 1280px;
+    align-self: flex-start;
+}
+
+.app_header_btn {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.col1 {
+    display: flex;
+    /* background: red; */
+}
+
+.col2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background:yellow; */
+}
+
+.col3 {
+    display: flex;
+    /* background: green; */
+    justify-content: end;
+}

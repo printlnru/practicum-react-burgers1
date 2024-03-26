@@ -1,0 +1,42 @@
+.modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.component {
+    display: flex;
+    position: relative;
+    background-color: #1C1C21;
+    width: 720px;
+    border-radius: 40px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.head {
+    width: 640px;
+    /* align-self: flex-start; */
+    display: flex;
+}
+
+.close {
+    /* display: block; */
+    /* float: right; */
+    position: absolute;
+    right: 40px;
+    top: 60px;
+    background-color: #1C1C21;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
