@@ -6,11 +6,11 @@ import ItemIngredient from './item-ingredient/item-ingredient'
 import ingredientType from "../../../utils/types";
 import style from './group-ingredients.module.css';
 
-export default function GroupIngredients({title, elements, selectedHandler}) {
+export default function GroupIngredients({id, title, elements, selectedHandler, subRef}) {
 
     return (
         <>
-            <div className='pt-10'>
+            <div className='pt-10' id={id} ref={subRef}>
                 <span className="text text_type_main-medium"> {title}</span>
             </div>
             <div className={style.container}>
