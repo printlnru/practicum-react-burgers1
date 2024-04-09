@@ -12,10 +12,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useDrop } from "react-dnd";
 
-import { COSTRUCTOR_ADD_ITEM, COSTRUCTOR_DELETE_ITEM } from '../../services/actions/constructor';
+import { CONSTRUCTOR_ADD_ITEM, CONSTRUCTOR_DELETE_ITEM } from '../../services/actions/constructor';
 import update from 'immutability-helper';
 
-import {COSTRUCTOR_RESORT} from '../../services/actions/constructor';
+import {CONSTRUCTOR_RESORT} from '../../services/actions/constructor';
 
 
 export default function BurgerConstructor() {
@@ -28,7 +28,7 @@ export default function BurgerConstructor() {
     });
 
     const onDropHandler = (item) => {
-        dispatch({ type: COSTRUCTOR_ADD_ITEM, item })
+        dispatch({ type: CONSTRUCTOR_ADD_ITEM, item })
     }
 
     const dispatch = useDispatch();
@@ -45,7 +45,7 @@ export default function BurgerConstructor() {
             //console.log('fire')
             dispatch(
                 {
-                    type: COSTRUCTOR_RESORT,
+                    type: CONSTRUCTOR_RESORT,
                     value: update(ingredients, {
                         $splice: [
                             [dragIndex, 1],

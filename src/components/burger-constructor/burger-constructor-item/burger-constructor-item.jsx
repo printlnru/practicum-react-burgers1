@@ -4,7 +4,7 @@ import { useDrag,useDrop } from "react-dnd";
 import { useRef } from 'react';
 import style from './burger-constructor-item.module.css';
 
-import { COSTRUCTOR_DELETE_ITEM } from '../../../services/actions/constructor';
+import { CONSTRUCTOR_DELETE_ITEM } from '../../../services/actions/constructor';
 
 import {  useDispatch } from 'react-redux';
 
@@ -15,7 +15,7 @@ export default function BurgerConstructorItem({ id, item, index, moveCard }) {
 
     const onDelete = () => {
         dispatch({
-            type: COSTRUCTOR_DELETE_ITEM,
+            type: CONSTRUCTOR_DELETE_ITEM,
             uid : item.uid
         })
     }

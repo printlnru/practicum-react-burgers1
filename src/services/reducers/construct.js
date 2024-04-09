@@ -1,7 +1,7 @@
 import {
-  COSTRUCTOR_ADD_ITEM,
-  COSTRUCTOR_DELETE_ITEM,
-  COSTRUCTOR_RESORT,
+  CONSTRUCTOR_ADD_ITEM,
+  CONSTRUCTOR_DELETE_ITEM,
+  CONSTRUCTOR_RESORT,
 
 } from '../actions/constructor';
 
@@ -26,7 +26,7 @@ function uuidv4() {
 
 export default function construct(state = initialState, action) {
   switch (action.type) {
-    case COSTRUCTOR_ADD_ITEM: {
+    case CONSTRUCTOR_ADD_ITEM: {
 
       if (action.item.type === 'bun')
         return {
@@ -45,14 +45,14 @@ export default function construct(state = initialState, action) {
           ]
         }
     }
-    case COSTRUCTOR_DELETE_ITEM: {
+    case CONSTRUCTOR_DELETE_ITEM: {
       //console.log(state.ingredients);
       return {
         ...state,
         ingredients: state.ingredients.filter(item => item.uid !== action.uid)
       };
     }
-    case COSTRUCTOR_RESORT: {
+    case CONSTRUCTOR_RESORT: {
       //console.log(action.value);
       return {
         ...state,
