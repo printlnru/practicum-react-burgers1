@@ -15,7 +15,7 @@ export function createOrder(ingredients) {
             type: ORDER_INPROGRESS
         })
 
-        console.log(ingredients)
+        //console.log(ingredients)
 
         fetch(API_BASE_PATH + ORDER_METHOD_NAME, {
             method: 'POST',

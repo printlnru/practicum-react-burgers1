@@ -18,7 +18,7 @@ const initialState = {
 export default function construct(state = initialState, action) {
   switch (action.type) {
     case ORDER_CREATE: {
-      console.log(action);
+      //console.log(action);
 
       return {
         ...state,
@@ -34,7 +34,7 @@ export default function construct(state = initialState, action) {
       }
     }
     case ORDER_SUCCESS: {
-      console.log(action.value);
+      //console.log(action.value);
       return {
         ...state,
         successStatus: true,
