@@ -28,7 +28,6 @@ export default function BurgerConstructor() {
     });
 
     const onDropHandler = (item) => {
-        console.log(item);
         dispatch({ type: COSTRUCTOR_ADD_ITEM, item })
     }
 
@@ -41,7 +40,7 @@ export default function BurgerConstructor() {
     const moveCard = useCallback(
         
         (dragIndex, hoverIndex) => {
-            console.log("dragIndex " + dragIndex + " hoverIndex" + hoverIndex);
+            //console.log("dragIndex " + dragIndex + " hoverIndex" + hoverIndex);
             const dragCard = ingredients[dragIndex]
             //console.log('fire')
             dispatch(
@@ -91,7 +90,7 @@ export default function BurgerConstructor() {
             {
                 !bun && (<div className={style.top}>
                     <ConstructorElement type="top" isLocked={true}
-                        text="Выбирай и тащи булку сюда скорей"
+                        text="Выбирай булку и другие приколюхи..."
                         price={''}
                         thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
                     />

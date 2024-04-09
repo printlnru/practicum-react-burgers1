@@ -13,17 +13,11 @@ export default function BurgerConstructorItem({ id, item, index, moveCard }) {
     const dispatch = useDispatch();
 
     const onDelete = () => {
-        console.log(item)
         dispatch({
             type: COSTRUCTOR_DELETE_ITEM,
             uid : item.uid
         })
     }
-
-    // const [, dragRef] = useDrag({
-    //     type: 'sort',
-    //     item: item
-    // });
 
     const [{ isDragging }, drag] = useDrag({
         type: 'card',

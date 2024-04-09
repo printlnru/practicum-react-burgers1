@@ -13,11 +13,13 @@ import IngridientDetails from '../ingredient-details/ingredient-details';
 
 import ingredientType from "../../utils/types";
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 
 import { INGREDIENTS_CHANGE_ACTIVE_TAB } from '../../services/actions/ingredients';
+
+import {CURRENT_INGREDIENTS_UNLOAD} from '../../services/actions/current-ingredient';
 
 
 export default function BurgerIngredients() {
@@ -33,7 +35,7 @@ export default function BurgerIngredients() {
     const { ingredients, ingredientsRequest, ingredientsFailed, activeTab } =
         useSelector(store => store.ingredients);
 
-    const [visibleModal, setVisibleModal] = useState({ visible: false, item: null });
+    //const [visibleModal, setVisibleModal] = useState({ visible: false, item: null });
 
     const onClickTab = (value) => {
         //console.log(value);
@@ -42,22 +44,14 @@ export default function BurgerIngredients() {
         const element = document.getElementById(value);
         if (element) {
             element.scrollIntoView({ behavior: "smooth" });
-        } else {
-            console.log("nnn")
         }
     }
 
     const closeModalHandle = () => {
-        setVisibleModal({ ...visibleModal, visible: false, item: null });
+        dispatch({type: CURRENT_INGREDIENTS_UNLOAD})
     }
 
-    const showModal = (e) => {
-        setVisibleModal({ ...visibleModal, visible: true, item: e })
-    }
-
-    const { visible, item } = visibleModal
-
-
+    const { visible } = useSelector(state => state.currentIngredient)
 
     const generalRef = useRef(null);
     const bunRef = useRef(null);
@@ -95,14 +89,14 @@ export default function BurgerIngredients() {
                     </div>
                     {/* TODO не понятно как сделать скролл как в макете */}
                     <div className={style.ingredients} onScroll={handleScroll} ref={generalRef}>
-                        <GroupIngredients subRef={bunRef} id={'bun'} selectedHandler={showModal} title="Булки" elements={ingredients.filter(element => element.type === "bun")} />
-                        <GroupIngredients subRef={sauceRef} id={'sauce'} selectedHandler={showModal} title="Соусы" elements={ingredients.filter(element => element.type === "sauce")} />
-                        <GroupIngredients subRef={mainRef} id={'main'} selectedHandler={showModal} title="Начинки" elements={ingredients.filter(element => element.type === "main")} />
+                        <GroupIngredients groupRef={bunRef} id={'bun'} title="Булки" elements={ingredients.filter(element => element.type === "bun")} />
+                        <GroupIngredients groupRef={sauceRef} id={'sauce'} title="Соусы" elements={ingredients.filter(element => element.type === "sauce")} />
+                        <GroupIngredients groupRef={mainRef} id={'main'} title="Начинки" elements={ingredients.filter(element => element.type === "main")} />
                     </div>
 
                     {visible &&
                         <Modal header='Детали ингредиента' onCloseHandle={closeModalHandle}>
-                            <IngridientDetails data={item} />
+                            <IngridientDetails />
                         </Modal>}
 
                 </>}

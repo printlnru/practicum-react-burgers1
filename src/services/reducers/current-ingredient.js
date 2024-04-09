@@ -1,10 +1,22 @@
-export default function currentIngredient(state = 0, action) {
-    switch (action.type) {
-      case 'INCREMENT':
-        return state + 1
-      case 'DECREMENT':
-        return state - 1
-      default:
-        return state
+import {
+  CURRENT_INGREDIENTS_LOAD,
+  CURRENT_INGREDIENTS_UNLOAD
+} from '../actions/current-ingredient';
+
+const initialState = {
+  ingredient: null,
+  visible: false
+};
+
+export default function currentIngredient(state = initialState, action) {
+  switch (action.type) {
+    case CURRENT_INGREDIENTS_LOAD: {
+      return { ingredient: action.value, visible: true }
     }
+    case CURRENT_INGREDIENTS_UNLOAD: {
+      return { ingredient: null, visible: false }
+    }
+    default:
+      return state
   }
+}

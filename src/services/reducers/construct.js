@@ -5,12 +5,15 @@ import {
 
 } from '../actions/constructor';
 
+import {ORDER_CLOSE} from '../actions/order'
+
 const initialState = {
   bun: null,
   ingredients: [
   ]
 };
 
+// from here https://www.geeksforgeeks.org/how-to-create-a-guid-uuid-in-javascript/
 function uuidv4() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
     .replace(/[xy]/g, function (c) {
@@ -43,17 +46,25 @@ export default function construct(state = initialState, action) {
         }
     }
     case COSTRUCTOR_DELETE_ITEM: {
-      console.log(state.ingredients);
+      //console.log(state.ingredients);
       return {
         ...state,
         ingredients: state.ingredients.filter(item => item.uid !== action.uid)
       };
     }
     case COSTRUCTOR_RESORT: {
-      console.log(action.value);
+      //console.log(action.value);
       return {
         ...state,
         ingredients: [...action.value]
+      }
+    }
+
+    case ORDER_CLOSE: {
+      return {
+        ...state,
+        ingredients: [],
+        bun: null
       }
     }
     default:
