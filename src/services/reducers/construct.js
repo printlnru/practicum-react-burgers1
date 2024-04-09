@@ -20,6 +20,7 @@ function uuidv4() {
     });
 }
 
+
 export default function construct(state = initialState, action) {
   switch (action.type) {
     case COSTRUCTOR_ADD_ITEM: {
@@ -27,7 +28,7 @@ export default function construct(state = initialState, action) {
       if (action.item.type === 'bun')
         return {
           ...state,
-          bun: action.item
+          bun: action.item,
         }
       else
         return {
@@ -54,9 +55,6 @@ export default function construct(state = initialState, action) {
         ...state,
         ingredients: [...action.value]
       }
-
-        //ingredients: state.ingredients.filter(item => item.uuid !== action.uuid)
-        ;
     }
     default:
       return state
