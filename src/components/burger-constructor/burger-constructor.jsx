@@ -15,7 +15,7 @@ import { useDrop } from "react-dnd";
 import { CONSTRUCTOR_ADD_ITEM, CONSTRUCTOR_DELETE_ITEM } from '../../services/actions/constructor';
 import update from 'immutability-helper';
 
-import {CONSTRUCTOR_RESORT} from '../../services/actions/constructor';
+import { CONSTRUCTOR_RESORT } from '../../services/actions/constructor';
 
 
 export default function BurgerConstructor() {
@@ -33,7 +33,7 @@ export default function BurgerConstructor() {
     const dispatch = useDispatch();
     const { bun, ingredients } = useSelector(store => store.construct);
     const moveCard = useCallback(
-        
+
         (dragIndex, hoverIndex) => {
             const dragCard = ingredients[dragIndex]
             dispatch(
@@ -94,7 +94,7 @@ export default function BurgerConstructor() {
             <ul className={style.ulstyle}>
 
                 {
-                    ingredients && ingredients.map((card, i) => renderCard(card, i))
+                    ingredients?.map(renderCard)
                 }
                 {
                     !ingredients && (
