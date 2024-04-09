@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   CONSTRUCTOR_ADD_ITEM,
   CONSTRUCTOR_DELETE_ITEM,
@@ -12,16 +14,6 @@ const initialState = {
   ingredients: [
   ]
 };
-
-// from here https://www.geeksforgeeks.org/how-to-create-a-guid-uuid-in-javascript/
-function uuidv4() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-    .replace(/[xy]/g, function (c) {
-      const r = Math.random() * 16 | 0,
-        v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-}
 
 
 export default function construct(state = initialState, action) {
