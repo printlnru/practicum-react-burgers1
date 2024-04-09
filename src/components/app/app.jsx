@@ -8,6 +8,9 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 
 import style from './app.module.css';
 
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 export default function App() {
 
 
@@ -15,12 +18,15 @@ export default function App() {
     <>
       <AppHeader />
       <main className={style.parent}>
-        <div className={style.col1}>
-          <BurgerIngredients />
-        </div>
-        <div className={style.col2}>
-          <BurgerConstructor />
-        </div>
+        <DndProvider backend={HTML5Backend}>
+
+          <div className={style.col1}>
+            <BurgerIngredients />
+          </div>
+          <div className={style.col2}>
+            <BurgerConstructor />
+          </div>
+        </DndProvider>
       </main>
     </>
   );
