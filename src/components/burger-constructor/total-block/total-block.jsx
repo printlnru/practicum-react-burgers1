@@ -1,4 +1,4 @@
-import React from 'react'
+import  { useMemo } from 'react'
 
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -21,12 +21,11 @@ export default function TotalBlock() {
 
     const disabledButton = !bun || ingredients.length == 0;
 
-    const totalCost = () => {
+    const  totalCost = useMemo(() => {
         const doubleBunCost = bun ? bun.price * 2 : 0;
         const ingridientsCost = ingredients.reduce((a, b) => a + (b.price), 0);
-
         return doubleBunCost + ingridientsCost;
-    }
+    }, [bun,ingredients])
 
     const onClickBtn = () => {
         //open modal here
@@ -47,7 +46,7 @@ export default function TotalBlock() {
 
     return (
         <div className={style.order}>
-            <span className="text text_type_digits-medium">{totalCost()}</span>
+            <span className="text text_type_digits-medium">{totalCost}</span>
 
             <div className={style.currencyicon} ><CurrencyIcon type="primary" /></div>
             <Button disabled={disabledButton} onClick={onClickBtn} htmlType="button" type="primary" size="large" extraClass="ml-10">{
