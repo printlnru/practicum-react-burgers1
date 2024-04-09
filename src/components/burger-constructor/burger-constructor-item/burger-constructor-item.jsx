@@ -4,10 +4,11 @@ import { useDrag,useDrop } from "react-dnd";
 import { useRef } from 'react';
 import style from './burger-constructor-item.module.css';
 
-import { COSTRUCTOR_ADD_ITEM, COSTRUCTOR_DELETE_ITEM } from '../../../services/actions/constructor';
+import { COSTRUCTOR_DELETE_ITEM } from '../../../services/actions/constructor';
 
 import {  useDispatch } from 'react-redux';
 
+// sort impl from here: https://codesandbox.io/p/sandbox/react-dnd-simple-sort-4pwrw?
 export default function BurgerConstructorItem({ id, item, index, moveCard }) {
 
     const dispatch = useDispatch();
@@ -59,8 +60,12 @@ export default function BurgerConstructorItem({ id, item, index, moveCard }) {
     const opacity = isDragging ? 0 : 1
     drag(drop(ref))
 
+
+//TODO •	при попытке «бросить» ингредиент за пределы BurgerConstructor ничего происходить не должно — ингредиент возвращается в исходное положение.
+// не нашел решения
+
     return (
-        <li className={style.item} ref={ref} >
+        <li className={style.item} ref={ref} style={{ ...style, opacity }} >
             <span style={{ cursor: 'move' }}>
                 <DragIcon type="primary" />
             </span>
