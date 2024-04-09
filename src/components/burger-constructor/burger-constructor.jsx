@@ -30,19 +30,12 @@ export default function BurgerConstructor() {
     const onDropHandler = (item) => {
         dispatch({ type: CONSTRUCTOR_ADD_ITEM, item })
     }
-
     const dispatch = useDispatch();
-
     const { bun, ingredients } = useSelector(store => store.construct);
-
-    //console.log(ingredients);
-
     const moveCard = useCallback(
         
         (dragIndex, hoverIndex) => {
-            //console.log("dragIndex " + dragIndex + " hoverIndex" + hoverIndex);
             const dragCard = ingredients[dragIndex]
-            //console.log('fire')
             dispatch(
                 {
                     type: CONSTRUCTOR_RESORT,

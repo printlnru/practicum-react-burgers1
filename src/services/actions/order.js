@@ -15,21 +15,18 @@ export function createOrder(ingredients) {
             type: ORDER_INPROGRESS
         })
 
-        //console.log(ingredients)
-
         fetch(API_BASE_PATH + ORDER_METHOD_NAME, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "ingredients": ingredients }) //ingredients
+            body: JSON.stringify({ "ingredients": ingredients })
         })
             .then(res => {
                 if (res.ok)
                     return res.json()
                 else {
-                    //console.log("ERROR 1")
                     return Promise.reject(`Error! Status code = ${res.status}`);
                 }
             })
@@ -48,7 +45,6 @@ export function createOrder(ingredients) {
                     
             )
             .catch(e => {
-                //console.log("ERROR 2")
                 dispatch({
                     type: ORDER_FAILED
                 })

@@ -35,12 +35,10 @@ export default function BurgerIngredients() {
     const { ingredients, ingredientsRequest, ingredientsFailed, activeTab } =
         useSelector(store => store.ingredients);
 
-    //const [visibleModal, setVisibleModal] = useState({ visible: false, item: null });
-
     const onClickTab = (value) => {
-        //console.log(value);
+
         dispatch({ type: INGREDIENTS_CHANGE_ACTIVE_TAB, value })
-        //TODO Scroll to value here
+        //Scroll to value here
         const element = document.getElementById(value);
         if (element) {
             element.scrollIntoView({ behavior: "smooth" });
@@ -65,7 +63,6 @@ export default function BurgerIngredients() {
         const minDist = Math.min(bunDist, sauceDist, mainDist);
         const value = minDist === bunDist ? 'bun' : minDist === sauceDist ? 'sauce' : 'main';
         if (value !== activeTab) {
-            //console.log("newState = " + value);
             dispatch({ type: INGREDIENTS_CHANGE_ACTIVE_TAB, value })
         }
     }

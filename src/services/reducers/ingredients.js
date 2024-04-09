@@ -15,7 +15,6 @@ const initialState = {
 export default function ingredients(state = initialState, action) {
     switch (action.type) {
         case INGREDIENTS_LOADING: {
-            //console.log(action);
             return {
                 ...state,
                 //очистим данные
@@ -28,12 +27,10 @@ export default function ingredients(state = initialState, action) {
             };
         }
         case INGREDIENTS_LOAD_SUCCESS:{
-            //console.log(action);
             return {
                 ...state,
-                //очистим данные
                 ingredients: action.ingredients,
-                // Запрос выполнился с ошибкой, 
+                // Запрос выполнился без ошибок, 
                 // выставляем соответсвующие значения в хранилище
                 ingredientsFailed: false,
                 // Запрос закончил своё выполнение
@@ -41,7 +38,6 @@ export default function ingredients(state = initialState, action) {
             };
         }
         case INGREDIENTS_LOAD_FAILED: {
-            //console.log(action);
             return {
                 ...state,
                 //очистим данные

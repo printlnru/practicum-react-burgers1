@@ -38,14 +38,12 @@ export default function construct(state = initialState, action) {
         }
     }
     case CONSTRUCTOR_DELETE_ITEM: {
-      //console.log(state.ingredients);
       return {
         ...state,
         ingredients: state.ingredients.filter(item => item.uid !== action.uid)
       };
     }
     case CONSTRUCTOR_RESORT: {
-      //console.log(action.value);
       return {
         ...state,
         ingredients: [...action.value]
