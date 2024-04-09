@@ -57,9 +57,8 @@ export default function BurgerConstructor() {
     const renderCard = (card, index) => {
         return (
             <BurgerConstructorItem
-                key={card._id + "-" + index}
+                key={card.uid}
                 index={index}
-                
                 item={card}
                 moveCard={moveCard}
             />
