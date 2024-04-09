@@ -22,10 +22,10 @@ export default function TotalBlock() {
     const disabledButton = !bun || ingredients.length == 0;
 
     const totalCost = () => {
-        const dubleBunCost = bun ? bun.price * 2 : 0;
+        const doubleBunCost = bun ? bun.price * 2 : 0;
         const ingridientsCost = ingredients.reduce((a, b) => a + (b.price), 0);
 
-        return dubleBunCost + ingridientsCost;
+        return doubleBunCost + ingridientsCost;
     }
 
     const onClickBtn = () => {
