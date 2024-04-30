@@ -1,15 +1,21 @@
-import { useEffect, useState } from 'react';
-//import { useSelector, useDispatch } from 'react-redux';
-//import { getIngredients } from '../../services/actions/ingredients';
-
 import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
+
 
 import style from './app.module.css';
 
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+
+import MainPage from "../../pages/main-page";
+import LoginPage from "../../pages/login-page";
+import RegisterPage from "../../pages/register-page";
+import ForgotPasswordPage from "../../pages/forgot-password-page";
+import ResetPasswordPage from "../../pages/reset-password-page";
+import ProfilePage from "../../pages/profile-page";
+import IngredientPage from "../../pages/ingredient-page";
+
+import { NotFound404 } from "../../pages/not-found-404-page";
+
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export default function App() {
 
@@ -18,15 +24,27 @@ export default function App() {
     <>
       <AppHeader />
       <main className={style.parent}>
-        <DndProvider backend={HTML5Backend}>
+        <Router>
+          <Routes>
+            {/* главная страница, конструктор бургеров */}
+            <Route path="/" element={<MainPage />} />
+            {/* страница авторизации */}
+            <Route path="/login" element={<LoginPage />} />
+            {/* страница регистрации */}
+            <Route path="/register" element={<RegisterPage />} />
+            {/* страница восстановления пароля */}
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            {/* страница сброса пароля */}
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
+            {/* страница с настройками профиля пользователя */}
+            <Route path="/profile" element={<ProfilePage />} />
+            {/* страница ингредиента */}
+            <Route path="/ingredients/:id" element={<IngredientPage />} />
 
-          <div className={style.col1}>
-            <BurgerIngredients />
-          </div>
-          <div className={style.col2}>
-            <BurgerConstructor />
-          </div>
-        </DndProvider>
+            {/* 404 */}
+            <Route path="*" element={<NotFound404 />} />
+          </Routes>
+        </Router>
       </main>
     </>
   );
