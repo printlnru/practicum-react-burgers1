@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import style from "./ingredient-details.module.css";
-import ingredientType from "../../utils/types";
+import { useSelector } from "react-redux";
 
-export default function IngridientDetails({ data }) {
+export default function IngridientDetails() {
+
+    const data = useSelector(state => state.currentIngredient.ingredient)
 
     return (
         <>
-            <img className={style.image} src={data.image_large} alt={data.name}/>
+            <img className={style.image} src={data.image_large} alt={data.name} />
             <p className="text text_type_main-medium mt-4 mb-8">{data.name}</p>
             <ul className={style.row}>
                 <li className={style.list_item}>
@@ -29,9 +31,4 @@ export default function IngridientDetails({ data }) {
             </ul>
         </>
     )
-}
-
-
-IngridientDetails.propTypes = {
-    data: ingredientType.isRequired
 }

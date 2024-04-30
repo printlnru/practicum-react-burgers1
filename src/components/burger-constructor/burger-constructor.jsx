@@ -1,62 +1,122 @@
-import React from 'react'
 
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import BurgerConstructorItem from './burger-constructor-item/burger-constructor-item';
+
+import { useCallback } from 'react';
 
 import style from './burger-constructor.module.css';
 
 import TotalBlock from "./total-block/total-block";
 
+import { useSelector, useDispatch } from 'react-redux';
+
+import { useDrop } from "react-dnd";
+
+import { CONSTRUCTOR_ADD_ITEM, CONSTRUCTOR_DELETE_ITEM } from '../../services/actions/constructor';
+import update from 'immutability-helper';
+
+import { CONSTRUCTOR_RESORT } from '../../services/actions/constructor';
+
+
 export default function BurgerConstructor() {
 
+    const [, dropTarget] = useDrop({
+        accept: "ingredient",
+        drop(item) {
+            onDropHandler(item);
+        },
+    });
+
+    const onDropHandler = (item) => {
+        dispatch({ type: CONSTRUCTOR_ADD_ITEM, item })
+    }
+    const dispatch = useDispatch();
+    const { bun, ingredients } = useSelector(store => store.construct);
+    const moveCard = useCallback(
+
+        (dragIndex, hoverIndex) => {
+            const dragCard = ingredients[dragIndex]
+            dispatch(
+                {
+                    type: CONSTRUCTOR_RESORT,
+                    value: update(ingredients, {
+                        $splice: [
+                            [dragIndex, 1],
+                            [hoverIndex, 0, dragCard],
+                        ],
+                    }),
+                }
+            )
+        },
+        [ingredients],
+    )
+
+
+
+
+    const renderCard = (card, index) => {
+        return (
+            <BurgerConstructorItem
+                key={card.uid}
+                index={index}
+                item={card}
+                moveCard={moveCard}
+            />
+        )
+    }
+
+
     return (
-        <section>
-            
-                {/* top bread */}
-                <div className={style.top}>
+        <section ref={dropTarget}>
+
+            {/* top bread */}
+
+            {
+                bun && (<div className={style.top}>
                     <ConstructorElement type="top" isLocked={true}
-                        text="Краторная булка N-200i (верх)"
-                        price={20}
+                        text={bun.name + " (верх)"}
+                        price={bun.price}
+                        thumbnail={bun.image}
+                    />
+                </div>)}
+            {
+                !bun && (<div className={style.top}>
+                    <ConstructorElement type="top" isLocked={true}
+                        text="Выбирай булку и другие приколюхи..."
+                        price={''}
                         thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
                     />
-                </div>
+                </div>)}
 
-                {/* filling (with scroll) */}
-                {/* не понятно как сделать скролл как в макете */}
-                <ul className={style.ulstyle}>
-                <li className={style.item}>
-                    <DragIcon type="primary"/>
-                    <ConstructorElement text="Соус традиционный галактический"
-                        price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}
+
+            {/* filling (with scroll) */}
+            {/* не понятно как сделать скролл как в макете */}
+            <ul className={style.ulstyle}>
+
+                {
+                    ingredients?.map(renderCard)
+                }
+                {
+                    !ingredients && (
+                        <li className={style.item}>
+                            <DragIcon type="primary" />
+                            <ConstructorElement text="А сюда начинку и не забудь про соус" on
+                                price={''} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}
+                            />
+                        </li>
+                    )
+                }
+            </ul>
+            {/* bottom bread */}
+            {
+                bun && (<div className={style.bottom}>
+                    <ConstructorElement type="bottom" isLocked={true}
+                        text={bun.name + " (низ)"}
+                        price={bun.price}
+                        thumbnail={bun.image}
+
                     />
-                </li>
-
-
-{/* Для отрисовки однотипной верстки принято использовать массив и его метод map, чтобы не дублировать код. И обязательно нужно добавлять уникальный атрибут key при этом. */}
-{/* если комментарий про это, то при реализации функционала так и планируется сделать. в данном случае этот код временный для того чтобы посмотреть как это выглядит */}
-<li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
-<li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
-<li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
-<li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
-<li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
-<li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
-<li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
-<li className={style.item}><DragIcon type="primary"/><ConstructorElement text="Соус традиционный галактический" price={30} thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}/></li>
-
-
-
-                </ul>
-                {/* bottom bread */}
-                <div className={style.bottom}>
-                    <ConstructorElement
-                        type="bottom"
-                        isLocked={true}
-                        text="Краторная булка N-200i (низ)"
-                        price={20}
-                        thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-                    />
-                </div>
-            
-
+                </div>)}
             <TotalBlock />
         </section>
 

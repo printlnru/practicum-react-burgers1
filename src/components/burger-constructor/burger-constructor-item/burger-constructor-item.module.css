@@ -1,0 +1,8 @@
+.item {
+    justify-content: end;
+    display: flex; 
+    list-style-type: none;
+    align-items: center;
+    padding-top: 16px;
+    /* cursor: 'move' */
+}
