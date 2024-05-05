@@ -1,0 +1,16 @@
+.link {
+    text-decoration: none;
+    display: flex;
+}
+
+.link_active {
+    color: #F2F2F3;
+    display: flex;
+    text-decoration: none;
+}
+
+.menu {
+    width: 320px;
+    text-align: left;
+}
+

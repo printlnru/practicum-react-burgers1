@@ -1,3 +1,5 @@
+import { getCookie } from "../../utils/cookie";
+
 export const ORDER_CREATE = 'ORDER_CREATE';
 export const ORDER_INPROGRESS = 'ORDER_INPROGRESS';
 export const ORDER_SUCCESS = 'ORDER_SUCCESS';
@@ -19,7 +21,8 @@ export function createOrder(ingredients) {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + getCookie('token')
             },
             body: JSON.stringify({ "ingredients": ingredients })
         })
@@ -42,7 +45,7 @@ export function createOrder(ingredients) {
                     }
 
                 }
-                    
+
             )
             .catch(e => {
                 dispatch({

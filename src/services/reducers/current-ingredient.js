@@ -1,5 +1,6 @@
 import {
   CURRENT_INGREDIENTS_LOAD,
+  CURRENT_INGREDIENTS_LOAD_AS_PAGE,
   CURRENT_INGREDIENTS_UNLOAD
 } from '../actions/current-ingredient';
 
@@ -12,6 +13,9 @@ export default function currentIngredient(state = initialState, action) {
   switch (action.type) {
     case CURRENT_INGREDIENTS_LOAD: {
       return { ingredient: action.value, visible: true }
+    }
+    case CURRENT_INGREDIENTS_LOAD_AS_PAGE: {
+      return { ingredient: action.value, visible: false }
     }
     case CURRENT_INGREDIENTS_UNLOAD: {
       return { ingredient: null, visible: false }
