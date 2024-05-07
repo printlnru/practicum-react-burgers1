@@ -14,7 +14,7 @@ import styles from "./login-page.module.css";
 export default function LoginPage() {
   const dispatch = useDispatch();
 
-  const { login, error } = useSelector((store) => store.auth);
+  const { error } = useSelector((store) => store.auth);
 
   const [state, setState] = useState({
     email: "",
@@ -32,10 +32,6 @@ export default function LoginPage() {
     e.preventDefault();
     dispatch(loginAct(state));
   };
-
-  if (login) {
-    return <Navigate to={"/"} />;
-  }
 
   return (
     <div className={styles.container}>

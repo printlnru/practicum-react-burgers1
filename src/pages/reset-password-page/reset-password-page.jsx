@@ -11,7 +11,7 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import styles from "./reset-password-page.module.css";
 
@@ -19,7 +19,6 @@ import { resetPasswordAct } from "../../services/actions/auth";
 
 export default function ResetPasswordPage() {
   const dispatch = useDispatch();
-  const { login } = useSelector((store) => store.auth);
 
   const [state, setState] = useState({
     password: "",
@@ -49,10 +48,6 @@ export default function ResetPasswordPage() {
   if (!!!forgotDate || diffMins > 1) {
     //2 минуты на восстановление
     return <Navigate to={"/forgot-password"} />;
-  }
-
-  if (login) {
-    return <Navigate to={"/"} />;
   }
 
   return (

@@ -1,19 +1,18 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-export const ProtectedRouteElement = ({ element }) => {
-    const {login} = useSelector(store => store.auth);
-    // const [isUserLoaded, setUserLoaded] = useState(false);
+export const ProtectedRouteElement = ({ element, onlyAuth }) => {
+  const { login } = useSelector((store) => store.auth);
 
-    // const init = async () => {
-    //     await getUser();
-    //     setUserLoaded(true);
-    // };
+  //Если страница только для вошедших и мы не вошли
+  if (onlyAuth && !login) return <Navigate to="/login" replace />;
 
-    // useEffect(() => {
-    //     init();
-    // }, []);
-
-    return login ? element : <Navigate to="/login" replace />;
-}
+  //Если страница только для не вошедших а мы вошли
+  return !onlyAuth && login ? (
+    <Navigate to="/" replace />
+  ) : (
+    //иначе
+    element
+  );
+};

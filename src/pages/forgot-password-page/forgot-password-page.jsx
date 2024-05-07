@@ -4,7 +4,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import styles from "./forgot-password-page.module.css";
 
@@ -14,8 +14,6 @@ export default function ForgotPasswordPage() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-
-  const { login } = useSelector((store) => store.auth);
 
   const [state, setState] = useState({
     email: "",
@@ -34,10 +32,6 @@ export default function ForgotPasswordPage() {
     localStorage.setItem("forgot", Date());
     navigate("/reset-password");
   };
-
-  if (login) {
-    return <Navigate to={"/"} />;
-  }
 
   return (
     <div className={styles.container}>

@@ -19,7 +19,7 @@ import { registrationAct } from "../../services/actions/auth";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
-  const { login, error } = useSelector((store) => store.auth);
+  const { error } = useSelector((store) => store.auth);
 
   const [state, setState] = useState({
     name: "",
@@ -38,10 +38,6 @@ export default function RegisterPage() {
     e.preventDefault();
     dispatch(registrationAct(state));
   };
-
-  if (login) {
-    return <Navigate to={"/"} />;
-  }
 
   return (
     <div className={styles.container}>
