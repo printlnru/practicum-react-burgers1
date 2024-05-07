@@ -4,9 +4,9 @@ import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 
-import styles from './login-page.module.css';
+import styles from './forgot-password-page.module.css';
 
-import { forgotPasswordAct } from '../services/actions/auth';
+import { forgotPasswordAct } from '../../services/actions/auth';
 
 
 export default function ForgotPasswordPage() {

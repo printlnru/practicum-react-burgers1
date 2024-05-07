@@ -3,10 +3,10 @@ import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burg
 import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
-import ProfileMenu from './profile-menu';
+import ProfileMenu from '../../components/profile-menu/profile-menu';
 import style from './profile-page.module.css';
 
-import { getUserInfoAct, updateUserAct } from '../services/actions/auth';
+import { getUserInfoAct, updateUserAct } from '../../services/actions/auth';
 
 
 

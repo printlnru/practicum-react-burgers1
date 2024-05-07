@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from './profile-menu.module.css';
 
-import { logoutAct } from '../services/actions/auth';
+import { logoutAct } from '../../services/actions/auth';
 
 export default function ProfileMenu() {
 

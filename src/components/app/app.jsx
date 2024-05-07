@@ -4,22 +4,22 @@ import AppHeader from '../app-header/app-header';
 import style from './app.module.css';
 
 
-import MainPage from "../../pages/main-page";
-import LoginPage from "../../pages/login-page";
-import RegisterPage from "../../pages/register-page";
-import ForgotPasswordPage from "../../pages/forgot-password-page";
-import ResetPasswordPage from "../../pages/reset-password-page";
-import ProfilePage from "../../pages/profile-page";
+import MainPage from "../../pages/main-page/main-page";
+import LoginPage from "../../pages/login-page/login-page";
+import RegisterPage from "../../pages/register-page/register-page";
+import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page";
+import ResetPasswordPage from "../../pages/reset-password-page/reset-password-page";
+import ProfilePage from "../../pages/profile-page/profile-page";
 
-import OrdersPage from "../../pages/orders-page";
-import OrderPage from "../../pages/order-page";
-
-
-import IngredientPage from "../../pages/ingredient-page";
+import OrdersPage from "../../pages/orders-page/orders-page";
+import OrderPage from "../../pages/order-page/order-page";
 
 
+import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 
-import { NotFound404 } from "../../pages/not-found-404-page";
+
+
+import { NotFound404 } from "../../pages/not-found-404-page/not-found-404-page";
 
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';

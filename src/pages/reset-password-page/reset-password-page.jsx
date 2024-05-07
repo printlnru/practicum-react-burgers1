@@ -3,9 +3,9 @@ import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burg
 import { Link, Redirect, useHistory, useLocation, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
-import styles from './login-page.module.css';
+import styles from './reset-password-page.module.css';
 
-import { resetPasswordAct } from '../services/actions/auth';
+import { resetPasswordAct } from '../../services/actions/auth';
 
 export default function ResetPasswordPage() {
 

@@ -1,5 +1,5 @@
 .wrapper {
-    background-image: url("../images/bg404.svg");
+    background-image: url("../../images/bg404.svg");
     width: 100vw;
     height: calc(100vh - 64px);
     background-size: cover;

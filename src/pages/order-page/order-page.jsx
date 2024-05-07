@@ -3,10 +3,10 @@ import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burg
 import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
-import ProfileMenu from './profile-menu';
-import style from './profile-page.module.css';
+import ProfileMenu from '../../components/profile-menu/profile-menu';
+import style from './order-page.module.css';
 
-export default function OrdersPage() {
+export default function OrderPage() {
 
     const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ export default function OrdersPage() {
                     <div className={style.container}>
                         <form >
                             <div className='pb-6'>
-                            Тут будет история заказов...
+                            Тут будет информация по заказу
                             </div>
                         </form>
                     </div>
