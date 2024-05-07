@@ -1,23 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './components/app/app';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./components/app/app";
+import reportWebVitals from "./reportWebVitals";
 
-import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import reducer from './services/reducers/root-reducer';
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import reducer from "./services/reducers/root-reducer";
 
 // Инициализируем хранилище с помощью корневого редьюсера
 const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: false
-  }),
-})
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>

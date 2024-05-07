@@ -4,15 +4,14 @@ import {
   ORDER_SUCCESS,
   ORDER_FAILED,
   ORDER_CLOSE,
-
-} from '../actions/order';
+} from "../actions/order";
 
 const initialState = {
   ingredients: [],
   inProgress: false,
   successStatus: false,
   failedStatus: false,
-  order: null
+  order: null,
 };
 
 export default function construct(state = initialState, action) {
@@ -20,16 +19,16 @@ export default function construct(state = initialState, action) {
     case ORDER_CREATE: {
       return {
         ...state,
-        ingredients: action.value
-      }
+        ingredients: action.value,
+      };
     }
     case ORDER_INPROGRESS: {
       return {
         ...state,
         inProgress: true,
         failedStatus: false,
-        successStatus: false
-      }
+        successStatus: false,
+      };
     }
     case ORDER_SUCCESS: {
       return {
@@ -37,16 +36,16 @@ export default function construct(state = initialState, action) {
         successStatus: true,
         inProgress: false,
         failedStatus: false,
-        order: action.value
-      }
+        order: action.value,
+      };
     }
     case ORDER_FAILED: {
       return {
         ...state,
         failedStatus: true,
         inProgress: false,
-        successStatus: false
-      }
+        successStatus: false,
+      };
     }
     case ORDER_CLOSE: {
       return {
@@ -55,10 +54,10 @@ export default function construct(state = initialState, action) {
         failedStatus: false,
         inProgress: false,
         successStatus: false,
-        order: null
-      }
+        order: null,
+      };
     }
     default:
-      return state
+      return state;
   }
 }
