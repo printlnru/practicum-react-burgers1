@@ -55,7 +55,6 @@ export default function auth(state = initialState, action) {
       };
     }
     case AUTH_LOGIN_SUCCESS: {
-      //console.log(action);
       return {
         ...state,
         error: false,

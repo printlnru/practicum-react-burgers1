@@ -5,10 +5,8 @@ import {
   forgotPasswordReq,
   resetPasswordReq,
   getUserInfoReq,
-  tokenReq,
   updateUserReq,
 } from "../api/auth";
-import { setCookie, deleteCookie, getCookie } from "../../utils/cookie";
 
 export const AUTH_LOGIN_IN_PROGRESS = "AUTH_LOGIN_IN_PROGRESS";
 export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS";
@@ -47,13 +45,6 @@ export const registrationAct = (state) => {
     registrationReq(state)
       .then((res) => {
         if (res && res.success) {
-          const accessToken = res.accessToken.split("Bearer ")[1];
-          const refreshToken = res.refreshToken;
-
-          //localStorage.setItem('accessToken', accessToken);
-          setCookie("token", accessToken);
-          localStorage.setItem("refreshToken", refreshToken);
-
           dispatch({
             type: AUTH_REGISTRATION_SUCCESS,
             user: res.user,
@@ -74,21 +65,10 @@ export const loginAct = (state) => {
 
     loginReq(state)
       .then((res) => {
-        if (res && res.success) {
-          const accessToken = res.accessToken.split("Bearer ")[1];
-          const refreshToken = res.refreshToken;
-
-          //localStorage.setItem('accessToken', accessToken);
-          setCookie("token", accessToken);
-          localStorage.setItem("refreshToken", refreshToken);
-
-          dispatch({
-            type: AUTH_LOGIN_SUCCESS,
-            user: res.user,
-          });
-        } else {
-          dispatch({ type: AUTH_LOGIN_FAILED });
-        }
+        dispatch({
+          type: AUTH_LOGIN_SUCCESS,
+          user: res,
+        });
       })
       .catch((err) => {
         dispatch({ type: AUTH_LOGIN_FAILED });
@@ -99,15 +79,9 @@ export const loginAct = (state) => {
 export const logoutAct = () => {
   return function (dispatch) {
     dispatch({ type: AUTH_LOGOUT_IN_PROGRESS });
-
-    let rToken = localStorage.getItem("refreshToken");
-
-    logoutReq(rToken)
+    logoutReq()
       .then((res) => {
         if (res && res.success) {
-          //localStorage.removeItem('accessToken');
-          deleteCookie("token");
-          localStorage.removeItem("refreshToken");
           dispatch({
             type: AUTH_LOGOUT_SUCCESS,
           });
@@ -159,9 +133,8 @@ export const resetPasswordAct = (state) => {
   };
 };
 
-export const getUserInfoAct = (second) => {
+export const getUserInfoAct = () => {
   return function (dispatch) {
-    console.log("start. second = ", second);
     dispatch({ type: AUTH_GET_USER_IN_PROGRESS });
     getUserInfoReq()
       .then((res) => {
@@ -171,38 +144,11 @@ export const getUserInfoAct = (second) => {
             user: res.user,
           });
         } else {
-          //dispatch({ type: AUTH_GET_USER_FAILED });
+          dispatch({ type: AUTH_GET_USER_FAILED });
         }
       })
       .catch((err) => {
-        if (err === 403) {
-          if (second == true) {
-            console.log("second = true");
-            dispatch({ type: AUTH_GET_USER_FAILED });
-          } else {
-            console.log("update token need...");
-            console.log(second);
-            tokenReq(localStorage.getItem("refreshToken"))
-              .then((res) => {
-                if (res && res.success) {
-                  const accessToken = res.accessToken.split("Bearer ")[1];
-                  const refreshToken = res.refreshToken;
-
-                  //localStorage.setItem('accessToken', accessToken);
-                  setCookie("token", accessToken);
-                  localStorage.setItem("refreshToken", refreshToken);
-
-                  getUserInfoAct(true);
-                } else {
-                  dispatch({ type: AUTH_GET_USER_FAILED });
-                }
-              })
-              .catch((err) => {
-                dispatch({ type: AUTH_GET_USER_FAILED });
-              });
-          }
-        }
-        //dispatch({ type: AUTH_GET_USER_FAILED });
+        dispatch({ type: AUTH_GET_USER_FAILED });
       });
   };
 };
@@ -210,13 +156,6 @@ export const getUserInfoAct = (second) => {
 export const updateUserAct = (state) => {
   return function (dispatch) {
     dispatch({ type: AUTH_UPDATE_USER_IN_PROGRESS });
-
-    console.log(state);
-    if (state.password) {
-      console.log("1");
-    } else {
-      console.log("2");
-    }
     updateUserReq(state)
       .then((res) => {
         if (res && res.success) {

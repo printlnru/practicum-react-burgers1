@@ -12,13 +12,8 @@ export default function IngridientDetails() {
    
     const dispatch = useDispatch();
     const location = useLocation();
-
-
-    console.log(location);
     
     const id = location.pathname.split('/')[2];
-
-    console.log(id);
 
     useEffect(() => {
         if (!data) {
