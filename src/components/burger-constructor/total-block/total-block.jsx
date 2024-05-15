@@ -1,4 +1,4 @@
-import  { useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -9,39 +9,46 @@ import OrderDetails from '../../order-details/order-details';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import {ORDER_CREATE,ORDER_CLOSE} from '../../../services/actions/order';
+import { ORDER_CREATE, ORDER_CLOSE } from '../../../services/actions/order';
+
+import { useNavigate } from 'react-router-dom';
 
 export default function TotalBlock() {
 
     const dispatch = useDispatch();
 
-    const {bun, ingredients} = useSelector(store => store.construct);
-    const visible = useSelector(store => store.order.ingredients.length>0);
-    
+    const { bun, ingredients } = useSelector(store => store.construct);
+    const visible = useSelector(store => store.order.ingredients.length > 0);
+    const { login } = useSelector(store => store.auth);
+    const navigate = useNavigate();
 
     const disabledButton = !bun || ingredients.length == 0;
 
-    const  totalCost = useMemo(() => {
+    const totalCost = useMemo(() => {
         const doubleBunCost = bun ? bun.price * 2 : 0;
         const ingridientsCost = ingredients.reduce((a, b) => a + (b.price), 0);
         return doubleBunCost + ingridientsCost;
-    }, [bun,ingredients])
+    }, [bun, ingredients])
 
     const onClickBtn = () => {
-        //open modal here
+        if (!login) {
+            navigate('/login');
+        }
 
-        const value = []
-        value.push(bun._id);
-        ingredients.forEach(e => {
-            value.push(e._id);
-        });
-        value.push(bun._id);
+        else {
+            const value = []
+            value.push(bun._id);
+            ingredients.forEach(e => {
+                value.push(e._id);
+            });
+            value.push(bun._id);
 
-        dispatch({type: ORDER_CREATE, value})
+            dispatch({ type: ORDER_CREATE, value })
+        }
     }
 
     const closeModalHandle = () => {
-        dispatch({type: ORDER_CLOSE})
+        dispatch({ type: ORDER_CLOSE })
     }
 
     return (

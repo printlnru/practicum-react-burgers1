@@ -16,8 +16,6 @@ export default function GroupIngredients({id, title, elements, groupRef}) {
             <div className={style.container}>
                 {
                     elements.map(
-                        // TODO count for demo
-                        //(element, index) => (<ItemIngredient key={element._id} item={element} count={ index == 0 ? 1 : 0} selectedHandler={selectedHandler}/>)
                         (element, index) => (<ItemIngredient key={element._id} item={element}/>)
                     )
                 }

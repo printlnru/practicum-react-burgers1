@@ -7,10 +7,6 @@ import style from './burger-ingredients.module.css';
 
 import GroupIngredients from './group-ingredients/group-ingredients'
 
-
-import Modal from '../modal/modal';
-import IngridientDetails from '../ingredient-details/ingredient-details';
-
 import ingredientType from "../../utils/types";
 
 import { useEffect, useRef } from 'react';
@@ -18,8 +14,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 
 import { INGREDIENTS_CHANGE_ACTIVE_TAB } from '../../services/actions/ingredients';
-
-import {CURRENT_INGREDIENTS_UNLOAD} from '../../services/actions/current-ingredient';
 
 
 export default function BurgerIngredients() {
@@ -29,7 +23,6 @@ export default function BurgerIngredients() {
 
     useEffect(() => {
         dispatch(getIngredients())
-
     }, []);
 
     const { ingredients, ingredientsRequest, ingredientsFailed, activeTab } =
@@ -44,12 +37,6 @@ export default function BurgerIngredients() {
             element.scrollIntoView({ behavior: "smooth" });
         }
     }
-
-    const closeModalHandle = () => {
-        dispatch({type: CURRENT_INGREDIENTS_UNLOAD})
-    }
-
-    const { visible } = useSelector(state => state.currentIngredient)
 
     const generalRef = useRef(null);
     const bunRef = useRef(null);
@@ -90,12 +77,6 @@ export default function BurgerIngredients() {
                         <GroupIngredients groupRef={sauceRef} id={'sauce'} title="Соусы" elements={ingredients.filter(element => element.type === "sauce")} />
                         <GroupIngredients groupRef={mainRef} id={'main'} title="Начинки" elements={ingredients.filter(element => element.type === "main")} />
                     </div>
-
-                    {visible &&
-                        <Modal header='Детали ингредиента' onCloseHandle={closeModalHandle}>
-                            <IngridientDetails />
-                        </Modal>}
-
                 </>}
         </>
     )

@@ -1,0 +1,12 @@
+.col1 {
+  height: calc(100vh - 64px - 16px);
+  width: 600px;
+  display: inline-block;
+}
+
+.col2 {
+  margin-left: 40px;
+  width: 600px;
+  display: inline-block;
+  margin-top: 100px;
+}

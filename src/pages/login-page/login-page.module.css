@@ -1,0 +1,11 @@
+.container {
+  height: calc(100vh - 64px);
+  display: grid;
+  align-items: center;
+  /* justify-content: center; */
+  text-align: center;
+}
+
+.nav_list {
+  list-style-type: none;
+}

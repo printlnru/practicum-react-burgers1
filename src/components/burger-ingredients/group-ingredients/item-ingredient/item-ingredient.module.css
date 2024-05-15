@@ -1,35 +1,37 @@
-
-
+.article {
+  text-decoration: none;
+  color: #FFFFFF;
+}
 .counter {
-    position: relative;
+  position: relative;
 }
 
 .textcenter {
-    text-align: center
+  text-align: center;
 }
 
 .item {
-    /* 'm-3' */
-    margin: 12px;
-    display: grid;
-    width: 272px;
-    cursor: pointer;
+  /* 'm-3' */
+  margin: 12px;
+  display: grid;
+  width: 272px;
+  cursor: pointer;
 }
 
 .currencyContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4px;
 }
 
 .currency {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .name {
-    text-align: center;
-    padding-top: 4px;
+  text-align: center;
+  padding-top: 4px;
 }

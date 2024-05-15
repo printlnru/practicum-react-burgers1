@@ -1,38 +1,33 @@
-export const INGREDIENTS_LOADING = 'INGREDIENTS_LOADING';
-export const INGREDIENTS_LOAD_SUCCESS = 'INGREDIENTS_LOAD_SUCCESS';
-export const INGREDIENTS_LOAD_FAILED = 'INGREDIENTS_LOAD_FAILED';
+export const INGREDIENTS_LOADING = "INGREDIENTS_LOADING";
+export const INGREDIENTS_LOAD_SUCCESS = "INGREDIENTS_LOAD_SUCCESS";
+export const INGREDIENTS_LOAD_FAILED = "INGREDIENTS_LOAD_FAILED";
 
-export const INGREDIENTS_CHANGE_ACTIVE_TAB = 'INGREDIENTS_CHANGE_ACTIVE_TAB';
+export const INGREDIENTS_CHANGE_ACTIVE_TAB = "INGREDIENTS_CHANGE_ACTIVE_TAB";
 
-
-const API_BASE_PATH = 'https://norma.nomoreparties.space/api';
-const INGREDIENTS_METHOD_NAME = '/ingredients';
+const API_BASE_PATH = "https://norma.nomoreparties.space/api";
+const INGREDIENTS_METHOD_NAME = "/ingredients";
 
 export function getIngredients() {
-    return function (dispatch) {
+  return function (dispatch) {
+    dispatch({
+      type: INGREDIENTS_LOADING,
+    });
 
+    fetch(API_BASE_PATH + INGREDIENTS_METHOD_NAME)
+      .then((res) => {
+        if (res.ok) return res.json();
+        else return Promise.reject(`Error! Status code = ${res.status}`);
+      })
+      .then((data) =>
         dispatch({
-            type: INGREDIENTS_LOADING
+          type: INGREDIENTS_LOAD_SUCCESS,
+          ingredients: data.data,
         })
-
-        fetch(API_BASE_PATH + INGREDIENTS_METHOD_NAME)
-            .then(res => {
-                if (res.ok)
-                    return res.json()
-                else
-                    return Promise.reject(`Error! Status code = ${res.status}`);
-            })
-            .then(
-                data =>
-                    dispatch({
-                        type: INGREDIENTS_LOAD_SUCCESS,
-                        ingredients: data.data
-                    })
-            )
-            .catch(e => {
-                dispatch({
-                    type: INGREDIENTS_LOAD_FAILED
-                })
-            });
-    }
-};
+      )
+      .catch((e) => {
+        dispatch({
+          type: INGREDIENTS_LOAD_FAILED,
+        });
+      });
+  };
+}

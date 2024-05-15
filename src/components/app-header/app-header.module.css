@@ -21,6 +21,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #FFF;
+    text-decoration: none;
+}
+
+.app_header_btn:hover {
+    color: #F00;
 }
 
 .col1 {
