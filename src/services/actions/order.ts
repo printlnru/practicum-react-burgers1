@@ -1,4 +1,6 @@
+import { AppDispatch } from "../..";
 import { getCookie } from "../../utils/cookie";
+import { TIngredient } from "../../utils/types";
 
 export const ORDER_CREATE = "ORDER_CREATE";
 export const ORDER_INPROGRESS = "ORDER_INPROGRESS";
@@ -9,8 +11,8 @@ export const ORDER_CLOSE = "ORDER_CLOSE";
 const API_BASE_PATH = "https://norma.nomoreparties.space/api";
 const ORDER_METHOD_NAME = "/orders";
 
-export function createOrder(ingredients) {
-  return function (dispatch) {
+export function createOrder(ingredients: Array<TIngredient>) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: ORDER_INPROGRESS,
     });

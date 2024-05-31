@@ -1,3 +1,4 @@
+import { AppDispatch } from "../..";
 import {
   registrationReq,
   loginReq,
@@ -38,8 +39,8 @@ export const AUTH_UPDATE_USER_IN_PROGRESS = "AUTH_UPDATE_USER_IN_PROGRESS";
 export const AUTH_UPDATE_USER_SUCCESS = "AUTH_UPDATE_USER_SUCCESS";
 export const AUTH_UPDATE_USER_FAILED = "AUTH_UPDATE_USER_FAILED";
 
-export const registrationAct = (state) => {
-  return function (dispatch) {
+export const registrationAct = (state: any) => {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_REGISTRATION_IN_PROGRESS });
 
     registrationReq(state)
@@ -59,8 +60,8 @@ export const registrationAct = (state) => {
   };
 };
 
-export const loginAct = (state) => {
-  return function (dispatch) {
+export const loginAct = (state: any) => {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_LOGIN_IN_PROGRESS });
 
     loginReq(state)
@@ -77,7 +78,7 @@ export const loginAct = (state) => {
 };
 
 export const logoutAct = () => {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_LOGOUT_IN_PROGRESS });
     logoutReq()
       .then((res) => {
@@ -95,8 +96,8 @@ export const logoutAct = () => {
   };
 };
 
-export const forgotPasswordAct = (state) => {
-  return function (dispatch) {
+export const forgotPasswordAct = (state: any) => {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_FORGOT_PASSWORD_IN_PROGRESS });
     forgotPasswordReq(state)
       .then((res) => {
@@ -114,8 +115,8 @@ export const forgotPasswordAct = (state) => {
   };
 };
 
-export const resetPasswordAct = (state) => {
-  return function (dispatch) {
+export const resetPasswordAct = (state: any) => {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_RESET_PASSWORD_IN_PROGRESS });
     resetPasswordReq(state)
       .then((res) => {
@@ -134,10 +135,10 @@ export const resetPasswordAct = (state) => {
 };
 
 export const getUserInfoAct = () => {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_GET_USER_IN_PROGRESS });
     getUserInfoReq()
-      .then((res) => {
+      .then((res: any) => {
         if (res && res.success) {
           dispatch({
             type: AUTH_GET_USER_SUCCESS,
@@ -147,17 +148,17 @@ export const getUserInfoAct = () => {
           dispatch({ type: AUTH_GET_USER_FAILED });
         }
       })
-      .catch((err) => {
+      .catch((err: any) => {
         dispatch({ type: AUTH_GET_USER_FAILED });
       });
   };
 };
 
-export const updateUserAct = (state) => {
-  return function (dispatch) {
+export const updateUserAct = (state: any) => {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_UPDATE_USER_IN_PROGRESS });
     updateUserReq(state)
-      .then((res) => {
+      .then((res: any) => {
         if (res && res.success) {
           dispatch({
             type: AUTH_UPDATE_USER_SUCCESS,
@@ -167,7 +168,7 @@ export const updateUserAct = (state) => {
           dispatch({ type: AUTH_UPDATE_USER_FAILED });
         }
       })
-      .catch((err) => {
+      .catch((err: any) => {
         dispatch({ type: AUTH_UPDATE_USER_FAILED });
       });
   };

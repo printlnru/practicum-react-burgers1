@@ -1,15 +1,21 @@
+import { TIngredient } from "../../utils/types";
 import {
   CURRENT_INGREDIENTS_LOAD,
   CURRENT_INGREDIENTS_LOAD_AS_PAGE,
   CURRENT_INGREDIENTS_UNLOAD,
 } from "../actions/current-ingredient";
 
-const initialState = {
+type TState = {
+  ingredient: TIngredient | null;
+  visible: boolean;
+};
+
+const initialState: TState = {
   ingredient: null,
   visible: false,
 };
 
-export default function currentIngredient(state = initialState, action) {
+export default function currentIngredient(state = initialState, action: any) {
   switch (action.type) {
     case CURRENT_INGREDIENTS_LOAD: {
       return { ingredient: action.value, visible: true };

@@ -1,34 +1,32 @@
 
-import PropTypes from 'prop-types';
-
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import style from './burger-ingredients.module.css';
 
-import GroupIngredients from './group-ingredients/group-ingredients'
-
-import ingredientType from "../../utils/types";
+import {GroupIngredients} from './group-ingredients/group-ingredients'
 
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 
 import { INGREDIENTS_CHANGE_ACTIVE_TAB } from '../../services/actions/ingredients';
+import { useAppDispatch, useAppSelector } from '../..';
+import { TIngredient } from '../../utils/types';
 
 
 export default function BurgerIngredients() {
 
     // Получаем метод dispatch
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(getIngredients())
     }, []);
 
     const { ingredients, ingredientsRequest, ingredientsFailed, activeTab } =
-        useSelector(store => store.ingredients);
+        useAppSelector(store => store.ingredients);
 
-    const onClickTab = (value) => {
+    const onClickTab = (value: string) => {
 
         dispatch({ type: INGREDIENTS_CHANGE_ACTIVE_TAB, value })
         //Scroll to value here
@@ -38,22 +36,23 @@ export default function BurgerIngredients() {
         }
     }
 
-    const generalRef = useRef(null);
-    const bunRef = useRef(null);
-    const sauceRef = useRef(null);
-    const mainRef = useRef(null);
+    const generalRef = useRef<HTMLDivElement>(null);
+    const bunRef = useRef<HTMLElement>(null);
+    const sauceRef = useRef<HTMLElement>(null);
+    const mainRef = useRef<HTMLElement>(null);
     const handleScroll = () => {
-        const generalTop = generalRef.current.getBoundingClientRect().top;
-        const bunDist = Math.abs(generalTop - bunRef.current.getBoundingClientRect().top)
-        const sauceDist = Math.abs(generalTop - sauceRef.current.getBoundingClientRect().top)
-        const mainDist = Math.abs(generalTop - mainRef.current.getBoundingClientRect().top)
+        
+        const generalTop = generalRef.current?.getBoundingClientRect().top || 0;
+        const bunDist = Math.abs(generalTop - (bunRef.current?.getBoundingClientRect().top || 0))
+        const sauceDist = Math.abs(generalTop - (sauceRef.current?.getBoundingClientRect().top|| 0))
+        const mainDist = Math.abs(generalTop - (mainRef.current?.getBoundingClientRect().top|| 0))
         const minDist = Math.min(bunDist, sauceDist, mainDist);
         const value = minDist === bunDist ? 'bun' : minDist === sauceDist ? 'sauce' : 'main';
         if (value !== activeTab) {
             dispatch({ type: INGREDIENTS_CHANGE_ACTIVE_TAB, value })
         }
     }
-
+    
     return (
         <>
             {ingredientsRequest && 'Загрузка...'}
@@ -73,15 +72,15 @@ export default function BurgerIngredients() {
                     </div>
                     {/* TODO не понятно как сделать скролл как в макете */}
                     <div className={style.ingredients} onScroll={handleScroll} ref={generalRef}>
-                        <GroupIngredients groupRef={bunRef} id={'bun'} title="Булки" elements={ingredients.filter(element => element.type === "bun")} />
-                        <GroupIngredients groupRef={sauceRef} id={'sauce'} title="Соусы" elements={ingredients.filter(element => element.type === "sauce")} />
-                        <GroupIngredients groupRef={mainRef} id={'main'} title="Начинки" elements={ingredients.filter(element => element.type === "main")} />
+                        <GroupIngredients groupRef={bunRef} id={'bun'} title="Булки" elements={(ingredients as Array<TIngredient>) .filter(element => element.type === "bun")} />
+                        <GroupIngredients groupRef={sauceRef} id={'sauce'} title="Соусы" elements={(ingredients as Array<TIngredient>).filter(element => element.type === "sauce")} />
+                        <GroupIngredients groupRef={mainRef} id={'main'} title="Начинки" elements={(ingredients as Array<TIngredient>).filter(element => element.type === "main")} />
                     </div>
                 </>}
         </>
     )
 }
 
-BurgerIngredients.propTypes = {
-    allIngredients: PropTypes.arrayOf(ingredientType.isRequired)
-}
+// BurgerIngredients.propTypes = {
+//     allIngredients: PropTypes.arrayOf(ingredientType.isRequired)
+// }

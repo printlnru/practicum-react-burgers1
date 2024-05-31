@@ -1,3 +1,5 @@
+import { AppDispatch } from "../..";
+
 export const INGREDIENTS_LOADING = "INGREDIENTS_LOADING";
 export const INGREDIENTS_LOAD_SUCCESS = "INGREDIENTS_LOAD_SUCCESS";
 export const INGREDIENTS_LOAD_FAILED = "INGREDIENTS_LOAD_FAILED";
@@ -8,7 +10,7 @@ const API_BASE_PATH = "https://norma.nomoreparties.space/api";
 const INGREDIENTS_METHOD_NAME = "/ingredients";
 
 export function getIngredients() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: INGREDIENTS_LOADING,
     });

@@ -1,8 +1,14 @@
 import { configureRefreshFetch, fetchJSON } from "refresh-fetch";
-import merge from "lodash/merge";
+import merge from "lodash.merge";
 
 import { API_BASE_PATH } from "./config";
 import { setCookie, deleteCookie, getCookie } from "../../utils/cookie";
+import {
+  TForgotPassword,
+  TLogin,
+  TResetPassword,
+  TUpdateUser,
+} from "../../utils/types";
 
 const LOGIN_METHOD_NAME = "/auth/login";
 const LOGOUT_METHOD_NAME = "/auth/logout";
@@ -17,7 +23,7 @@ const COOKIE_NAME = "token";
 
 const retrieveToken = () => getCookie("token");
 
-const saveToken = (accessToken, refreshToken) => {
+const saveToken = (accessToken: string, refreshToken: string) => {
   //localStorage.setItem('accessToken', accessToken);
   setCookie("token", accessToken);
   localStorage.setItem("refreshToken", refreshToken);
@@ -50,8 +56,7 @@ const refreshToken = () => {
         let refreshToken = res.refreshToken;
         saveToken(accessToken, refreshToken);
         return res.user;
-      }
-      else{
+      } else {
         return Promise.reject(res.status);
       }
     })
@@ -63,7 +68,7 @@ const refreshToken = () => {
     });
 };
 
-const shouldRefreshToken = (error) => {
+const shouldRefreshToken = (error: any) => {
   var rv =
     error.response.status === 403 &&
     error.body.success === false &&
@@ -71,7 +76,7 @@ const shouldRefreshToken = (error) => {
   return rv;
 };
 
-const fetchJSONWithToken = (url, options = {}) => {
+const fetchJSONWithToken = (url: string, options = {}) => {
   const token = retrieveToken();
 
   let optionsWithToken = options;
@@ -93,14 +98,14 @@ const refreshedFetch = configureRefreshFetch({
   refreshToken,
 });
 
-export const registrationReq = ({ email, password, name }) => {
+export const registrationReq = ({ email, password, name }: TUpdateUser) => {
   return fetch(API_BASE_PATH + REGISTRATION_METHOD_NAME, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({ email, password, name }),
-  }).then((res) => {
+  }).then((res:any) => {
     if (res.ok) {
       let accessToken = res.accessToken.split("Bearer ")[1];
       let refreshToken = res.refreshToken;
@@ -112,7 +117,7 @@ export const registrationReq = ({ email, password, name }) => {
   });
 };
 
-export const loginReq = ({ email, password }) => {
+export const loginReq = ({ email, password }: TLogin) => {
   return fetch(API_BASE_PATH + LOGIN_METHOD_NAME, {
     method: "POST",
     headers: {
@@ -133,8 +138,7 @@ export const loginReq = ({ email, password }) => {
         let refreshToken = res.refreshToken;
         saveToken(accessToken, refreshToken);
         return res.user;
-      }
-      else{
+      } else {
         return Promise.reject(res.status);
       }
     });
@@ -158,7 +162,7 @@ export const logoutReq = () => {
   });
 };
 
-export const forgotPasswordReq = ({ email }) => {
+export const forgotPasswordReq = ({ email }: TForgotPassword) => {
   return fetch(API_BASE_PATH + FORGOT_PASSWORD_METHOD_NAME, {
     method: "POST",
     headers: {
@@ -174,7 +178,7 @@ export const forgotPasswordReq = ({ email }) => {
   });
 };
 
-export const resetPasswordReq = ({ password, token }) => {
+export const resetPasswordReq = ({ password, token }: TResetPassword) => {
   return fetch(API_BASE_PATH + RESET_PASSWORD_METHOD_NAME, {
     method: "POST",
     headers: {
@@ -192,8 +196,8 @@ export const resetPasswordReq = ({ password, token }) => {
 
 export const getUserInfoReq = () => {
   return refreshedFetch(API_BASE_PATH + USER_INFO_METHOD_NAME, {
-    method: "GET"
-  }).then((res) => {
+    method: "GET",
+  }).then((res: any) => {
     if (res.body.success) {
       return res.body;
     } else {
@@ -202,11 +206,11 @@ export const getUserInfoReq = () => {
   });
 };
 
-export const updateUserReq = ({ email, password, name }) => {
+export const updateUserReq = ({ email, password, name }: TUpdateUser) => {
   return refreshedFetch(API_BASE_PATH + USER_INFO_METHOD_NAME, {
     method: "PATCH",
     body: JSON.stringify({ email, password, name }),
-  }).then((res) => {
+  }).then((res: any) => {
     if (res.body.success) {
       return res.body;
     } else {

@@ -20,8 +20,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { ProtectedRouteElement } from "../protected-route";
 
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import {Modal} from "../modal/modal";
+import {IngredientDetails} from "../ingredient-details/ingredient-details" ;
 
 import { CURRENT_INGREDIENTS_UNLOAD } from "../../services/actions/current-ingredient";
 import { useDispatch } from "react-redux";
@@ -111,7 +111,7 @@ export default function App() {
                 element={
                   <Modal
                     onCloseHandle={closeModalHandle}
-                    title="Детали ингредиента"
+                    header="Детали ингредиента"
                   >
                     <IngredientDetails />
                   </Modal>

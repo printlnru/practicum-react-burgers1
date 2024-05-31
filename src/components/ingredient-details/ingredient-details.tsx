@@ -1,15 +1,19 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import style from "./ingredient-details.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { getIngredients } from "../../services/actions/ingredients";
 import { CURRENT_INGREDIENTS_LOAD_AS_PAGE } from "../../services/actions/current-ingredient";
 
-export default function IngridientDetails() {
-  const data = useSelector((state) => state.currentIngredient.ingredient);
-  const { ingredients } = useSelector((store) => store.ingredients);
+import {TIngredient} from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../..";
 
-  const dispatch = useDispatch();
+
+export const IngredientDetails : FC = () => {
+  const data = useAppSelector((state) => state.currentIngredient.ingredient);
+  const { ingredients  } = useAppSelector((store) => store.ingredients);
+
+  const dispatch = useAppDispatch();
   const location = useLocation();
 
   const id = location.pathname.split("/")[2];
@@ -23,12 +27,12 @@ export default function IngridientDetails() {
 
   useEffect(() => {
     if (!data) {
-      var item = ingredients.find((e) => e._id == id);
+      var item = ingredients.find((e:TIngredient) => e._id == id);
       dispatch({ type: CURRENT_INGREDIENTS_LOAD_AS_PAGE, value: item });
     }
   }, [ingredients]);
 
-  if (!data) return "Loading...";
+  if (!data) return (<>"Loading..."</>);
   else
     return (
       <>

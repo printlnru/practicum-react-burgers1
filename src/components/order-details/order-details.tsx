@@ -1,21 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import image from "../../images/done.png";
 import style from './order-details.module.css';
 
 import { createOrder } from '../../services/actions/order';
-import { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../..';
 
 export default function OrderDetails() {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(createOrder(ingredients))
     }, []);
 
-    const { inProgress, successStatus, failedStatus, order, ingredients } = useSelector(store => store.order);
+    const { inProgress, successStatus, failedStatus, order, ingredients } = useAppSelector(store => store.order);
 
     return (
         <>

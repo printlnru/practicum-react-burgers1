@@ -1,47 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Input,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {
-  Link,
-  Redirect,
-  useHistory,
-  useLocation,
-  Navigate,
-} from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
 
 import styles from "./reset-password-page.module.css";
 
 import { resetPasswordAct } from "../../services/actions/auth";
+import { useAppDispatch } from "../..";
 
 export default function ResetPasswordPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [state, setState] = useState({
     password: "",
     token: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(resetPasswordAct(state));
   };
 
-  const forgotDate = Date.parse(localStorage.getItem("forgot"));
+  const forgotDate: number = Date.parse(
+    localStorage.getItem("forgot") as string
+  );
 
-  const today = new Date();
+  const today: Date = new Date();
 
-  var diffMs = today - forgotDate;
+  var diffMs = today.getTime() - forgotDate;
   //const diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
   const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
 
@@ -71,6 +67,8 @@ export default function ResetPasswordPage() {
             onChange={handleChange}
             name={"token"}
             value={state.token}
+            onPointerEnterCapture
+            onPointerLeaveCapture
           />
         </div>
 

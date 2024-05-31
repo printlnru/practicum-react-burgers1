@@ -4,29 +4,34 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 
 import style from './total-block.module.css';
 
-import Modal from '../../modal/modal';
+import {Modal} from '../../modal/modal';
 import OrderDetails from '../../order-details/order-details';
-
-import { useSelector, useDispatch } from 'react-redux';
 
 import { ORDER_CREATE, ORDER_CLOSE } from '../../../services/actions/order';
 
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../..';
+import { TIngredient } from '../../../utils/types';
 
 export default function TotalBlock() {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const { bun, ingredients } = useSelector(store => store.construct);
-    const visible = useSelector(store => store.order.ingredients.length > 0);
-    const { login } = useSelector(store => store.auth);
+    const { bun, ingredients } = useAppSelector(store => store.construct);
+    const visible = useAppSelector(store => store.order.ingredients.length > 0);
+    const { login } = useAppSelector(store => store.auth);
     const navigate = useNavigate();
 
     const disabledButton = !bun || ingredients.length == 0;
 
     const totalCost = useMemo(() => {
-        const doubleBunCost = bun ? bun.price * 2 : 0;
-        const ingridientsCost = ingredients.reduce((a, b) => a + (b.price), 0);
+        const doubleBunCost: number = bun ? bun.price * 2 : 0;
+
+        //const ingridientsCost : number = ingredients.reduce((a : number, b : TIngredient) => a as number + ( (b as TIngredient).price),0);
+        var ingridientsCost : number = 0;
+        ingredients.forEach(e   => {
+            ingridientsCost += e.price;
+        });
         return doubleBunCost + ingridientsCost;
     }, [bun, ingredients])
 
