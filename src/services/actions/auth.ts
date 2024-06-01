@@ -1,4 +1,5 @@
 import { AppDispatch } from "../..";
+import { TForgotPassword, TLogin, TResetPassword, TUpdateUser, TUserInfoResult } from "../../utils/types";
 import {
   registrationReq,
   loginReq,
@@ -39,7 +40,7 @@ export const AUTH_UPDATE_USER_IN_PROGRESS = "AUTH_UPDATE_USER_IN_PROGRESS";
 export const AUTH_UPDATE_USER_SUCCESS = "AUTH_UPDATE_USER_SUCCESS";
 export const AUTH_UPDATE_USER_FAILED = "AUTH_UPDATE_USER_FAILED";
 
-export const registrationAct = (state: any) => {
+export const registrationAct = (state: TUpdateUser) => {
   return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_REGISTRATION_IN_PROGRESS });
 
@@ -60,7 +61,7 @@ export const registrationAct = (state: any) => {
   };
 };
 
-export const loginAct = (state: any) => {
+export const loginAct = (state: TLogin) => {
   return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_LOGIN_IN_PROGRESS });
 
@@ -96,7 +97,7 @@ export const logoutAct = () => {
   };
 };
 
-export const forgotPasswordAct = (state: any) => {
+export const forgotPasswordAct = (state: TForgotPassword) => {
   return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_FORGOT_PASSWORD_IN_PROGRESS });
     forgotPasswordReq(state)
@@ -115,7 +116,7 @@ export const forgotPasswordAct = (state: any) => {
   };
 };
 
-export const resetPasswordAct = (state: any) => {
+export const resetPasswordAct = (state: TResetPassword) => {
   return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_RESET_PASSWORD_IN_PROGRESS });
     resetPasswordReq(state)
@@ -138,7 +139,7 @@ export const getUserInfoAct = () => {
   return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_GET_USER_IN_PROGRESS });
     getUserInfoReq()
-      .then((res: any) => {
+      .then((res: TUserInfoResult) => {
         if (res && res.success) {
           dispatch({
             type: AUTH_GET_USER_SUCCESS,
@@ -154,11 +155,11 @@ export const getUserInfoAct = () => {
   };
 };
 
-export const updateUserAct = (state: any) => {
+export const updateUserAct = (state: TUpdateUser) => {
   return function (dispatch: AppDispatch) {
     dispatch({ type: AUTH_UPDATE_USER_IN_PROGRESS });
     updateUserReq(state)
-      .then((res: any) => {
+      .then((res: TUserInfoResult) => {
         if (res && res.success) {
           dispatch({
             type: AUTH_UPDATE_USER_SUCCESS,

@@ -26,15 +26,18 @@ type TState = {
 const initialState : TState = {
   error: false,
   login: !!getCookie("token"),
-  // aToken: null,
-  // rToken: null,
   user: {
     name: "",
     email: "",
   },
 };
 
-export default function auth(state = initialState, action: any) {
+type TActionType = {
+  type: string;
+  user: TUser;
+}
+
+export default function auth(state = initialState, action: TActionType) {
   switch (action.type) {
     case AUTH_REGISTRATION_IN_PROGRESS: {
       return {

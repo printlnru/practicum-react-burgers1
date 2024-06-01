@@ -17,21 +17,23 @@ import update from "immutability-helper";
 
 import { CONSTRUCTOR_RESORT } from "../../services/actions/constructor";
 import { useAppDispatch, useAppSelector } from "../..";
+import { TMoveCardCallback, TIngredient, TIngredientWithUid } from "../../utils/types";
 
 export default function BurgerConstructor() {
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item: TIngredient) {
       onDropHandler(item);
     },
   });
 
-  const onDropHandler = (item: any) => {
+  const onDropHandler = (item: TIngredient) => {
     dispatch({ type: CONSTRUCTOR_ADD_ITEM, item });
   };
   const dispatch = useAppDispatch();
   const { bun, ingredients } = useAppSelector((store) => store.construct);
-  const moveCard = useCallback(
+
+  const moveCard = useCallback<TMoveCardCallback>(
     (dragIndex: number, hoverIndex: number) => {
       const dragCard = ingredients[dragIndex];
       dispatch({
@@ -47,7 +49,7 @@ export default function BurgerConstructor() {
     [ingredients]
   );
 
-  const renderCard = (card: any, index: number) => {
+  const renderCard = (card: TIngredientWithUid, index: number) => {
     return (
       <BurgerConstructorItem
         key={card.uid}

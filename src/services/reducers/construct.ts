@@ -7,11 +7,11 @@ import {
 } from "../actions/constructor";
 
 import { ORDER_CLOSE } from "../actions/order";
-import { TIngredient } from "../../utils/types";
+import { TIngredient, TIngredientWithUid } from "../../utils/types";
 
 type TState = {
   bun: TIngredient | null;
-  ingredients: Array<TIngredient>
+  ingredients: Array<TIngredientWithUid>
 }
 
 const initialState : TState = {

@@ -69,6 +69,12 @@ const refreshToken = () => {
 };
 
 const shouldRefreshToken = (error: any) => {
+
+  console.log("error:");
+  console.log(error);
+  
+  
+
   var rv =
     error.response.status === 403 &&
     error.body.success === false &&
@@ -98,6 +104,15 @@ const refreshedFetch = configureRefreshFetch({
   refreshToken,
 });
 
+type A = {
+  ok: boolean;
+  status: string;
+  accessToken: string;
+  refreshToken: string;
+  json: () => void;
+}
+
+
 export const registrationReq = ({ email, password, name }: TUpdateUser) => {
   return fetch(API_BASE_PATH + REGISTRATION_METHOD_NAME, {
     method: "POST",
@@ -105,7 +120,7 @@ export const registrationReq = ({ email, password, name }: TUpdateUser) => {
       "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({ email, password, name }),
-  }).then((res:any) => {
+  }).then((res: any) => {
     if (res.ok) {
       let accessToken = res.accessToken.split("Bearer ")[1];
       let refreshToken = res.refreshToken;

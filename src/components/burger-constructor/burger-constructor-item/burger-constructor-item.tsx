@@ -9,12 +9,12 @@ import style from "./burger-constructor-item.module.css";
 import { CONSTRUCTOR_DELETE_ITEM } from "../../../services/actions/constructor";
 
 import { useDispatch } from "react-redux";
+import { TMoveCardCallback, TIngredientWithUid, TUseDropHover } from "../../../utils/types";
 
 interface IMovieProps {
-  //id: number;
-  item: any;
+  item: TIngredientWithUid;
   index: number;
-  moveCard: any;
+  moveCard: TMoveCardCallback;
 }
 
 // sort impl from here: https://codesandbox.io/p/sandbox/react-dnd-simple-sort-4pwrw?
@@ -41,9 +41,10 @@ export const BurgerConstructorItem: React.FC<IMovieProps> = ({
   });
 
   const ref = useRef<HTMLLIElement>(null);
-  const [, drop] = useDrop({
+  const [, drop] = useDrop<TUseDropHover>({
     accept: "card",
-    hover(item: any, monitor: DropTargetMonitor<unknown, unknown>) {
+    hover(item: TUseDropHover, monitor: DropTargetMonitor<unknown, unknown>) {
+
       if (!ref.current) {
         return;
       }

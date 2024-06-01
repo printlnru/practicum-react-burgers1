@@ -18,7 +18,7 @@ export default function TotalBlock() {
     const dispatch = useAppDispatch();
 
     const { bun, ingredients } = useAppSelector(store => store.construct);
-    const visible = useAppSelector(store => store.order.ingredients.length > 0);
+    const visible = useAppSelector(store => store.order.ingredients?.length || 0 > 0);
     const { login } = useAppSelector(store => store.auth);
     const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ export default function TotalBlock() {
             });
             value.push(bun._id);
 
-            dispatch({ type: ORDER_CREATE, value })
+            dispatch({ type: ORDER_CREATE, ingredients:value })
         }
     }
 

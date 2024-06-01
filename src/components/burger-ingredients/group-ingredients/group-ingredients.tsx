@@ -1,4 +1,4 @@
-import React from "react";
+import React, { LegacyRef, RefObject } from "react";
 
 import { ItemIngredient } from "./item-ingredient/item-ingredient";
 
@@ -9,7 +9,7 @@ type TGroupIngredients = {
   id: string;
   title: string;
   elements: Array<TIngredient>;
-  groupRef: any;
+  groupRef: RefObject<HTMLElement>;
 };
 
 export const GroupIngredients: React.FC<TGroupIngredients> = ({
@@ -20,7 +20,7 @@ export const GroupIngredients: React.FC<TGroupIngredients> = ({
 }) => {
   return (
     <>
-      <div className="pt-10" id={id} ref={groupRef}>
+      <div className="pt-10" id={id} ref={groupRef as any}>
         <span className="text text_type_main-medium"> {title}</span>
       </div>
       <div className={style.container}>

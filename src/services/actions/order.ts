@@ -34,11 +34,10 @@ export function createOrder(ingredients: Array<TIngredient>) {
       })
       .then((data) => {
         if (data.success) {
-          let orderNumber = data.order.number;
-
+        
           dispatch({
             type: ORDER_SUCCESS,
-            value: orderNumber,
+            order: data.order,
           });
         }
       })

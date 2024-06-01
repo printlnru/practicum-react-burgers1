@@ -15,6 +15,8 @@ export type TIngredient = {
   type: string;
 };
 
+export type TIngredientWithUid = TIngredient & { uid: string};
+
 export type TForgotPassword = {
   email: string;
 };
@@ -36,4 +38,32 @@ export type TUpdateUser = TLogin & {
 export type TUser = {
   name: string;
   email: string;
+}
+
+export type TMoveCardCallback = (dragIndex: number, hoverIndex: number) => void;
+
+export type TUseDropHover = {
+  index: number;
+  type: 'card';
+}
+
+
+export type TUserInfoResult = {
+  success: boolean,
+  user: TUser
+}
+
+
+export type TOrder = {
+  createdAt: string; // Date;
+  ingredients: Array<TIngredient>;
+  name: string;
+
+  number: number;
+  owner : any;
+  price: number;
+  status: string; //done
+  updatedAt: string; // Date;
+  _id: string;
+
 }
