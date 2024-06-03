@@ -7,13 +7,19 @@ import {
 } from "../actions/constructor";
 
 import { ORDER_CLOSE } from "../actions/order";
+import { TIngredient, TIngredientWithUid } from "../../utils/types";
 
-const initialState = {
+type TState = {
+  bun: TIngredient | null;
+  ingredients: Array<TIngredientWithUid>
+}
+
+const initialState : TState = {
   bun: null,
   ingredients: [],
 };
 
-export default function construct(state = initialState, action) {
+export default function construct(state : TState = initialState, action: any) {
   switch (action.type) {
     case CONSTRUCTOR_ADD_ITEM: {
       if (action.item.type === "bun")
@@ -37,7 +43,7 @@ export default function construct(state = initialState, action) {
       return {
         ...state,
         ingredients: state.ingredients.filter(
-          (item) => item.uid !== action.uid
+          (item: any) => item.uid !== action.uid
         ),
       };
     }

@@ -4,22 +4,16 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {
-  Link,
-  Redirect,
-  useHistory,
-  useLocation,
-  Navigate,
-} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import styles from "./register-page.module.css";
 
 import { registrationAct } from "../../services/actions/auth";
+import { useAppDispatch, useAppSelector } from "../..";
 
 export default function RegisterPage() {
-  const dispatch = useDispatch();
-  const { error } = useSelector((store) => store.auth);
+  const dispatch = useAppDispatch();
+  const { error } = useAppSelector((store) => store.auth);
 
   const [state, setState] = useState({
     name: "",
@@ -27,14 +21,14 @@ export default function RegisterPage() {
     password: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(registrationAct(state));
   };
@@ -51,6 +45,8 @@ export default function RegisterPage() {
             onChange={handleChange}
             name={"name"}
             value={state.name}
+            onPointerEnterCapture
+            onPointerLeaveCapture
           />
         </div>
 
@@ -61,6 +57,8 @@ export default function RegisterPage() {
             onChange={handleChange}
             name={"email"}
             value={state.email}
+            onPointerEnterCapture
+            onPointerLeaveCapture
           />
         </div>
 

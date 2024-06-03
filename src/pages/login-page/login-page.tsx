@@ -4,31 +4,31 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { loginAct } from "../../services/actions/auth";
 
 import styles from "./login-page.module.css";
+import { useAppDispatch, useAppSelector } from "../..";
 
 export default function LoginPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { error } = useSelector((store) => store.auth);
+  const { error } = useAppSelector((store) => store.auth);
 
   const [state, setState] = useState({
     email: "",
     password: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(loginAct(state));
   };
@@ -45,6 +45,8 @@ export default function LoginPage() {
             onChange={handleChange}
             name={"email"}
             value={state.email}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
           />
         </div>
 

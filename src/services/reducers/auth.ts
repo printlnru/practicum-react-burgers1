@@ -15,19 +15,29 @@ import {
   AUTH_FORGOT_PASSWORD_SUCCESS,
 } from "../actions/auth";
 import { getCookie } from "../../utils/cookie";
+import { TUser } from "../../utils/types";
 
-const initialState = {
+type TState = {
+  error: boolean;
+  login: boolean;
+  user: TUser;
+}
+
+const initialState : TState = {
   error: false,
   login: !!getCookie("token"),
-  // aToken: null,
-  // rToken: null,
   user: {
     name: "",
     email: "",
   },
 };
 
-export default function auth(state = initialState, action) {
+type TActionType = {
+  type: string;
+  user: TUser;
+}
+
+export default function auth(state = initialState, action: TActionType) {
   switch (action.type) {
     case AUTH_REGISTRATION_IN_PROGRESS: {
       return {

@@ -1,15 +1,14 @@
 
-import { Link, Redirect, useLocation, NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-
+import {   useLocation, NavLink } from 'react-router-dom';
 import styles from './profile-menu.module.css';
 
 import { logoutAct } from '../../services/actions/auth';
+import { useAppDispatch } from '../..';
 
 export default function ProfileMenu() {
 
     const { pathname } = useLocation();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleExit = () => {
         dispatch(logoutAct());

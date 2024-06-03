@@ -3,17 +3,17 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
 
 import ProfileMenu from "../../components/profile-menu/profile-menu";
 import style from "./profile-page.module.css";
 
 import { getUserInfoAct, updateUserAct } from "../../services/actions/auth";
+import { useAppDispatch, useAppSelector } from "../..";
 
 export default function ProfilePage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { user } = useSelector((store) => store.auth);
+  const { user } = useAppSelector((store) => store.auth);
 
   const [state, setState] = useState({
     name: "",
@@ -21,19 +21,19 @@ export default function ProfilePage() {
     password: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(updateUserAct(state));
   };
 
-  const handleReset = (e) => {
+  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
     setState({
       ...state,
       name: user.name,
@@ -71,6 +71,8 @@ export default function ProfilePage() {
                   name={"name"}
                   value={state.name}
                   onChange={handleChange}
+                  onPointerEnterCapture
+                  onPointerLeaveCapture
                 />
               </div>
 
@@ -82,6 +84,8 @@ export default function ProfilePage() {
                   name={"email"}
                   value={state.email}
                   onChange={handleChange}
+                  onPointerEnterCapture
+                  onPointerLeaveCapture
                 />
               </div>
 
@@ -93,6 +97,8 @@ export default function ProfilePage() {
                   name={"password"}
                   value={state.password}
                   onChange={handleChange}
+                  onPointerEnterCapture
+                  onPointerLeaveCapture
                 />
               </div>
 

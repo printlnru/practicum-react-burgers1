@@ -1,3 +1,4 @@
+import { TIngredient } from "../../utils/types";
 import {
   INGREDIENTS_LOADING,
   INGREDIENTS_LOAD_SUCCESS,
@@ -5,14 +6,21 @@ import {
   INGREDIENTS_CHANGE_ACTIVE_TAB,
 } from "../actions/ingredients";
 
-const initialState = {
+type TState = {
+  ingredientsRequest: boolean;
+  ingredientsFailed: boolean;
+  ingredients: Array<TIngredient>;
+  activeTab: string;
+}
+
+const initialState : TState= {
   ingredientsRequest: false,
   ingredientsFailed: false,
   ingredients: [],
   activeTab: "bun",
 };
 
-export default function ingredients(state = initialState, action) {
+export default function ingredients(state = initialState, action: any) {
   switch (action.type) {
     case INGREDIENTS_LOADING: {
       return {

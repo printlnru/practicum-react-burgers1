@@ -1,3 +1,4 @@
+import { TIngredient, TOrder } from "../../utils/types";
 import {
   ORDER_CREATE,
   ORDER_INPROGRESS,
@@ -6,7 +7,15 @@ import {
   ORDER_CLOSE,
 } from "../actions/order";
 
-const initialState = {
+type TState = {
+  ingredients: Array<TIngredient>,
+  inProgress: boolean,
+  successStatus: boolean,
+  failedStatus: boolean,
+  order: TOrder | null,
+}
+
+const initialState : TState = {
   ingredients: [],
   inProgress: false,
   successStatus: false,
@@ -14,12 +23,23 @@ const initialState = {
   order: null,
 };
 
-export default function construct(state = initialState, action) {
+//type TActionTypes = "ORDER_CREATE" | "ORDER_INPROGRESS" | "ORDER_SUCCESS" | "ORDER_FAILED" | "ORDER_CLOSE";
+
+type TActionType = {
+  type: string;
+  ingredients?: Array<TIngredient>;
+  order?: TOrder;
+}
+
+export default function construct(state = initialState, action: TActionType) {
+
+  console.log(action);
+  
   switch (action.type) {
     case ORDER_CREATE: {
       return {
         ...state,
-        ingredients: action.value,
+        ingredients: action.ingredients,
       };
     }
     case ORDER_INPROGRESS: {
@@ -36,7 +56,7 @@ export default function construct(state = initialState, action) {
         successStatus: true,
         inProgress: false,
         failedStatus: false,
-        order: action.value,
+        order: action.order,
       };
     }
     case ORDER_FAILED: {

@@ -3,15 +3,15 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useNavigate, Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./forgot-password-page.module.css";
 
 import { forgotPasswordAct } from "../../services/actions/auth";
+import { useAppDispatch } from "../..";
 
 export default function ForgotPasswordPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
@@ -19,14 +19,14 @@ export default function ForgotPasswordPage() {
     email: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(forgotPasswordAct(state));
     localStorage.setItem("forgot", Date());
@@ -44,8 +44,7 @@ export default function ForgotPasswordPage() {
             placeholder={"Укажите e-mail"}
             onChange={handleChange}
             name={"email"}
-            value={state.email}
-          />
+            value={state.email} onPointerEnterCapture onPointerLeaveCapture/>
         </div>
 
         <Button htmlType="submit" type="primary" size="medium">

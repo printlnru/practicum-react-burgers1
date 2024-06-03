@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import ingredientType from "../../../../utils/types";
 
 import { useDrag } from "react-dnd";
 
@@ -14,16 +12,22 @@ import {
 import style from "./item-ingredient.module.css";
 
 import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../..";
+import { TIngredient } from "../../../../utils/types";
 
-export default function ItemIngredient({ item }) {
-  const dispatch = useDispatch();
+type TItemIngredient = {
+  item: TIngredient;
+}
+
+export const ItemIngredient : React.FC<TItemIngredient> =  ({ item }) => {
+  const dispatch = useAppDispatch();
 
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: item,
   });
 
-  const count = useSelector((store) =>
+  const count = useAppSelector((store) =>
     item.type === "bun"
       ? store.construct.bun && store.construct.bun._id === item._id
         ? 2
@@ -58,6 +62,6 @@ export default function ItemIngredient({ item }) {
   );
 }
 
-ItemIngredient.propTypes = {
-  item: ingredientType.isRequired,
-};
+// ItemIngredient.propTypes = {
+//   item: ingredientType.isRequired,
+// };
