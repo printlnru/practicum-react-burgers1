@@ -14,7 +14,7 @@ export default function AppHeader() {
                         <BurgerIcon type="primary" />
                         <span className="text_type_main-default pl-2">Конструктор</span>
                     </NavLink>
-                    <NavLink className={style.app_header_btn}  to='/orders'>
+                    <NavLink className={style.app_header_btn}  to='/feed'>
                         <ListIcon type="primary" />
                         <span className="text_type_main-default pl-2">Лента заказов</span>
                     </NavLink>

@@ -10,6 +10,8 @@ export default function ProfileMenu() {
     const { pathname } = useLocation();
     const dispatch = useAppDispatch();
 
+    
+
     const handleExit = () => {
         dispatch(logoutAct());
     }
@@ -18,12 +20,12 @@ export default function ProfileMenu() {
         <nav className={styles.menu}>
 
             <NavLink to="/profile"
-                className={({ isActive }) => isActive ? styles.link_active + " text_type_main-medium text_color_inactive" : styles.link + " text_type_main-medium text_color_inactive"}>
+                className={({ isActive }) => isActive && pathname === '/profile' ? styles.link_active + " text_type_main-medium text_color_inactive" : styles.link + " text_type_main-medium text_color_inactive"}>
                 <span className='ml-2 pu-5 pb-5'>Профиль</span>
             </NavLink>
 
             <NavLink to="/profile/orders"
-                className={({ isActive }) => isActive ? styles.link_active + " text_type_main-medium text_color_inactive" : styles.link + " text_type_main-medium text_color_inactive"}>
+                className={({ isActive }) => isActive && pathname === '/profile/orders' ? styles.link_active + " text_type_main-medium text_color_inactive" : styles.link + " text_type_main-medium text_color_inactive"}>
                 <span className='ml-2 pu-5 pb-5'>История заказов</span>
             </NavLink>
 

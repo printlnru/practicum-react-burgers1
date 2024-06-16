@@ -34,7 +34,6 @@ export function createOrder(ingredients: Array<TIngredient>) {
       })
       .then((data) => {
         if (data.success) {
-        
           dispatch({
             type: ORDER_SUCCESS,
             order: data.order,
@@ -44,6 +43,41 @@ export function createOrder(ingredients: Array<TIngredient>) {
       .catch((e) => {
         dispatch({
           type: ORDER_FAILED,
+        });
+      });
+  };
+}
+
+export function getOrder(id: number) {
+  return function (dispatch: AppDispatch) {
+    dispatch({
+      type: ORDER_INPROGRESS,
+    });
+
+    fetch(API_BASE_PATH + ORDER_METHOD_NAME + "/" + id)
+      .then((res) => {
+        if (res.ok) return res.json();
+        else return Promise.reject(`Error! Status code = ${res.status}`);
+      })
+      .then((data) =>
+        {
+          if(data.success && data.orders && data.orders.length == 1)
+          {
+            dispatch({
+              type: ORDER_SUCCESS,
+              order: data.orders[0],
+            })
+          }
+          else {
+            dispatch({
+              type: ORDER_FAILED
+            });
+          }
+        }
+      )
+      .catch((e) => {
+        dispatch({
+          type: ORDER_FAILED
         });
       });
   };

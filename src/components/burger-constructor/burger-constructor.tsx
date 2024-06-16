@@ -64,18 +64,6 @@ export default function BurgerConstructor() {
   return (
     <section ref={dropTarget}>
       {/* top bread */}
-
-      {bun && (
-        <div className={style.top}>
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={bun.name + " (верх)"}
-            price={bun.price}
-            thumbnail={bun.image}
-          />
-        </div>
-      )}
       {!bun && (
         <div className={style.top}>
           <ConstructorElement
@@ -88,6 +76,18 @@ export default function BurgerConstructor() {
         </div>
       )}
 
+      {bun && (
+        <div className={style.top}>
+          <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={bun.name + " (верх)"}
+            price={bun.price}
+            thumbnail={bun.image}
+          />
+        </div>
+      )}
+      
       {/* filling (with scroll) */}
       {/* не понятно как сделать скролл как в макете */}
       <ul className={style.ulstyle}>

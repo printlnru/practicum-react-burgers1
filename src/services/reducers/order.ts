@@ -23,8 +23,6 @@ const initialState : TState = {
   order: null,
 };
 
-//type TActionTypes = "ORDER_CREATE" | "ORDER_INPROGRESS" | "ORDER_SUCCESS" | "ORDER_FAILED" | "ORDER_CLOSE";
-
 type TActionType = {
   type: string;
   ingredients?: Array<TIngredient>;
@@ -32,9 +30,6 @@ type TActionType = {
 }
 
 export default function construct(state = initialState, action: TActionType) {
-
-  console.log(action);
-  
   switch (action.type) {
     case ORDER_CREATE: {
       return {

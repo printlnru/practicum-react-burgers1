@@ -9,6 +9,9 @@ import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password
 import ResetPasswordPage from "../../pages/reset-password-page/reset-password-page";
 import ProfilePage from "../../pages/profile-page/profile-page";
 
+import FeedsPage from "../../pages/feeds-page/feeds-page";
+import FeedPage from "../../pages/feed-page/feed-page";
+
 import OrdersPage from "../../pages/orders-page/orders-page";
 import OrderPage from "../../pages/order-page/order-page";
 
@@ -20,19 +23,20 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { ProtectedRouteElement } from "../protected-route";
 
-import {Modal} from "../modal/modal";
-import {IngredientDetails} from "../ingredient-details/ingredient-details" ;
+import { Modal } from "../modal/modal";
+import { IngredientDetails } from "../ingredient-details/ingredient-details";
 
 import { CURRENT_INGREDIENTS_UNLOAD } from "../../services/actions/current-ingredient";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FeedDetails } from "../feed-details/feed-details";
+import OrderDetails from "../order-details/order-details";
 
 export default function App() {
   const Wrapper = () => {
     const location = useLocation();
     const locationState = location.state;
     const background = locationState && locationState.background;
-
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -42,6 +46,12 @@ export default function App() {
       navigate("/");
     };
 
+    const closeFeedModalHandle = () => {
+      navigate("/feed");
+    };
+const closeProfileOrdersModalHandle = () => {
+      navigate("/profile/orders");
+    };
     return (
       <>
         <AppHeader />
@@ -119,26 +129,65 @@ export default function App() {
               />
             )}
 
-            {/* История заказов */}
+            {/* страница ленты заказов. Доступен всем пользователям */}
+            <Route path="/feed" element={<FeedsPage />} />
+            {/* страница заказа в ленте. Доступен всем пользователям */}
+            {!background && (
+              <Route path="/feed/:number" element={<FeedPage />} />
+            )}
+
+            {/* Модальное окно заказа в ленте. Доступен всем пользователям */}
+            {background && (
+              <Route
+                path="/feed/:number"
+                element={
+                  <Modal onCloseHandle={closeFeedModalHandle} header="">
+                    <FeedDetails />
+                  </Modal>
+                }
+              />
+            )}
+
+            {/* страница истории заказов пользователя. Доступен только авторизованным пользователям */}
             <Route
               path="/profile/orders"
               element={
                 <ProtectedRouteElement
-                  onlyAuth={false}
+                  onlyAuth={true}
                   element={<OrdersPage />}
                 />
               }
             />
-            {/* Истории заказа */}
-            <Route
-              path="/profile/orders/:number"
-              element={
-                <ProtectedRouteElement
-                  onlyAuth={false}
-                  element={<OrderPage />}
-                />
-              }
-            />
+            {/* страница заказа в истории заказов. Доступен только авторизованным пользователям */}
+
+            {!background && (
+              <Route
+                path="/profile/orders/:number"
+                element={
+                  <ProtectedRouteElement
+                    onlyAuth={true}
+                    element={<OrderPage />}
+                  />
+                }
+              />
+            )}
+
+            {/* Модальное окно заказа в истории заказов. Доступен только авторизованным пользователям */}
+            {background && (
+              <Route
+                path="/profile/orders/:number"
+                element={
+                  <ProtectedRouteElement
+                    onlyAuth={true}
+                    element={
+                      <Modal onCloseHandle={closeProfileOrdersModalHandle} header="">
+                        <FeedDetails />
+                      </Modal>
+                    }
+                  />
+                }
+              />
+            )}
 
             {/* 404 */}
             <Route path="*" element={<NotFound404 />} />

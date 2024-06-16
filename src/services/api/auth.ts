@@ -69,12 +69,6 @@ const refreshToken = () => {
 };
 
 const shouldRefreshToken = (error: any) => {
-
-  console.log("error:");
-  console.log(error);
-  
-  
-
   var rv =
     error.response.status === 403 &&
     error.body.success === false &&

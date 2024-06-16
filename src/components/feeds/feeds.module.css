@@ -1,0 +1,5 @@
+.ingredients {
+    overflow-y : auto;
+    height: calc(100vh - 170px);
+    width: 620px;
+}

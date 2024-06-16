@@ -7,16 +7,14 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider, TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import reducer from "./services/reducers/root-reducer";
+import { socketMiddleware } from "./services/middleware/socket-middleware";
 
 
 
 // Инициализируем хранилище с помощью корневого редьюсера
 const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+  middleware: (getDefaultMiddleware) =>    getDefaultMiddleware( { serializableCheck: false } ).concat(socketMiddleware()),
 });
 
 
