@@ -14,7 +14,7 @@ import { socketMiddleware } from "./services/middleware/socket-middleware";
 // Инициализируем хранилище с помощью корневого редьюсера
 const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) =>    getDefaultMiddleware( { serializableCheck: false } ).concat(socketMiddleware()),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware( { serializableCheck: false } ).concat(socketMiddleware()),
 });
 
 

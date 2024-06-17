@@ -9,7 +9,6 @@ import {
 } from "../../services/actions/ws-actions";
 import { API_WS_ALL_PATH } from "../../services/api/config";
 import { TOrder } from "../../utils/types";
-import { getIngredients } from "../../services/actions/ingredients";
 import { MessageOrder2OrderMapper } from "../../utils/common-functions";
 
 export const Feeds : React.FC = () => {
@@ -25,7 +24,6 @@ export const Feeds : React.FC = () => {
 
 
   useEffect(() => {
-    dispatch(getIngredients())
     dispatch({ type: WS_CONNECTION_START, payload: API_WS_ALL_PATH });
     return () => {
       dispatch({ type: WS_CONNECTION_CLOSED });

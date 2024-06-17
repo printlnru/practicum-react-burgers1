@@ -14,7 +14,6 @@ import {
 import { useLocation } from "react-router-dom";
 
 import { getOrder } from "../../services/actions/order";
-import { getIngredients } from "../../services/actions/ingredients";
 
 export const FeedDetails: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +28,7 @@ export const FeedDetails: React.FC = () => {
   const str_id: string = arr[arr.length - 1];
 
   useEffect(() => {
-    dispatch(getIngredients());
+
     var id: number = +str_id;
     dispatch(getOrder(id));
   }, []);

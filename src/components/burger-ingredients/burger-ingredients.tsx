@@ -6,8 +6,7 @@ import style from './burger-ingredients.module.css';
 import {GroupIngredients} from './group-ingredients/group-ingredients'
 
 import { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getIngredients } from '../../services/actions/ingredients';
+
 
 import { INGREDIENTS_CHANGE_ACTIVE_TAB } from '../../services/actions/ingredients';
 import { useAppDispatch, useAppSelector } from '../..';
@@ -18,10 +17,6 @@ export default function BurgerIngredients() {
 
     // Получаем метод dispatch
     const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(getIngredients())
-    }, []);
 
     const { ingredients, ingredientsRequest, ingredientsFailed, activeTab } =
         useAppSelector(store => store.ingredients);

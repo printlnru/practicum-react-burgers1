@@ -5,7 +5,6 @@ import style from "./orders-page.module.css";
 import { TOrder } from "../../utils/types";
 import { FeedItem } from "../../components/feeds/feed-item/feed-item";
 import { useAppDispatch, useAppSelector } from "../..";
-import { getIngredients } from "../../services/actions/ingredients";
 import {
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_START,
@@ -25,7 +24,6 @@ export default function OrdersPage() {
   const [orders, setOrders] = useState<TOrder[]>([]);
 
   useEffect(() => {
-    dispatch(getIngredients());
     dispatch({
       type: WS_CONNECTION_START,
       payload: API_WS_USER_PATH + "?token=" + getCookie("token"),

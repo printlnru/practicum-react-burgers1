@@ -1,6 +1,6 @@
 import { Middleware, MiddlewareAPI } from "redux";
 import { AppDispatch, RootState } from "../..";
-import { AppActions, TMessage } from "../../utils/types";
+import { TMessage } from "../../utils/types";
 import {
     TWsActions,
   WS_CONNECTION_CLOSED,

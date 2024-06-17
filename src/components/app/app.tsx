@@ -27,10 +27,11 @@ import { Modal } from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 
 import { CURRENT_INGREDIENTS_UNLOAD } from "../../services/actions/current-ingredient";
-import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FeedDetails } from "../feed-details/feed-details";
-import OrderDetails from "../order-details/order-details";
+import { useAppDispatch } from "../..";
+import { useEffect } from "react";
+import { getIngredients } from "../../services/actions/ingredients";
 
 export default function App() {
   const Wrapper = () => {
@@ -38,8 +39,12 @@ export default function App() {
     const locationState = location.state;
     const background = locationState && locationState.background;
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+      dispatch(getIngredients());
+    }, []);
 
     const closeModalHandle = () => {
       dispatch({ type: CURRENT_INGREDIENTS_UNLOAD });
@@ -49,7 +54,7 @@ export default function App() {
     const closeFeedModalHandle = () => {
       navigate("/feed");
     };
-const closeProfileOrdersModalHandle = () => {
+    const closeProfileOrdersModalHandle = () => {
       navigate("/profile/orders");
     };
     return (
@@ -180,7 +185,10 @@ const closeProfileOrdersModalHandle = () => {
                   <ProtectedRouteElement
                     onlyAuth={true}
                     element={
-                      <Modal onCloseHandle={closeProfileOrdersModalHandle} header="">
+                      <Modal
+                        onCloseHandle={closeProfileOrdersModalHandle}
+                        header=""
+                      >
                         <FeedDetails />
                       </Modal>
                     }
@@ -199,7 +207,7 @@ const closeProfileOrdersModalHandle = () => {
 
   const background = false;
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   //const navigate = useNavigate();
 
