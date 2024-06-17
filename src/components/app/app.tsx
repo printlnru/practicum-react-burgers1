@@ -61,7 +61,7 @@ export default function App() {
       <>
         <AppHeader />
         <main className={style.parent}>
-          <Routes>
+          <Routes location={background || location}>
             {/* главная страница, конструктор бургеров */}
             <Route path="/" element={<MainPage />} />
             {/* страница авторизации */}
@@ -119,38 +119,11 @@ export default function App() {
               <Route path="/ingredients/:id" element={<IngredientPage />} />
             )}
 
-            {/* Модальное окно ингредиента */}
-            {background && (
-              <Route
-                path="/ingredients/:id"
-                element={
-                  <Modal
-                    onCloseHandle={closeModalHandle}
-                    header="Детали ингредиента"
-                  >
-                    <IngredientDetails />
-                  </Modal>
-                }
-              />
-            )}
-
             {/* страница ленты заказов. Доступен всем пользователям */}
             <Route path="/feed" element={<FeedsPage />} />
             {/* страница заказа в ленте. Доступен всем пользователям */}
             {!background && (
               <Route path="/feed/:number" element={<FeedPage />} />
-            )}
-
-            {/* Модальное окно заказа в ленте. Доступен всем пользователям */}
-            {background && (
-              <Route
-                path="/feed/:number"
-                element={
-                  <Modal onCloseHandle={closeFeedModalHandle} header="">
-                    <FeedDetails />
-                  </Modal>
-                }
-              />
             )}
 
             {/* страница истории заказов пользователя. Доступен только авторизованным пользователям */}
@@ -177,28 +150,54 @@ export default function App() {
               />
             )}
 
-            {/* Модальное окно заказа в истории заказов. Доступен только авторизованным пользователям */}
-            {background && (
-              <Route
-                path="/profile/orders/:number"
-                element={
-                  <ProtectedRouteElement
-                    onlyAuth={true}
-                    element={
-                      <Modal
-                        onCloseHandle={closeProfileOrdersModalHandle}
-                        header=""
-                      >
-                        <FeedDetails />
-                      </Modal>
-                    }
-                  />
-                }
-              />
-            )}
-
             {/* 404 */}
             <Route path="*" element={<NotFound404 />} />
+          </Routes>
+          <Routes>
+            {background && (
+              <>
+                {" "}
+                /* Модальное окно ингредиента */
+                <Route
+                  path="/ingredients/:id"
+                  element={
+                    <Modal
+                      onCloseHandle={closeModalHandle}
+                      header="Детали ингредиента"
+                    >
+                      <IngredientDetails />
+                    </Modal>
+                  }
+                />
+                /* Модальное окно заказа в ленте. Доступен всем пользователям */
+                <Route
+                  path="/feed/:number"
+                  element={
+                    <Modal onCloseHandle={closeFeedModalHandle} header="">
+                      <FeedDetails />
+                    </Modal>
+                  }
+                />
+                /* Модальное окно заказа в истории заказов. Доступен только
+                авторизованным пользователям */
+                <Route
+                  path="/profile/orders/:number"
+                  element={
+                    <ProtectedRouteElement
+                      onlyAuth={true}
+                      element={
+                        <Modal
+                          onCloseHandle={closeProfileOrdersModalHandle}
+                          header=""
+                        >
+                          <FeedDetails />
+                        </Modal>
+                      }
+                    />
+                  }
+                />
+              </>
+            )}
           </Routes>
         </main>
       </>
