@@ -1,5 +1,7 @@
 import { AppDispatch } from "../..";
-import { checkResponse } from "../../utils/check-response";
+import {
+  requestWithCheckResponse,
+} from "../../utils/check-response";
 import { getCookie } from "../../utils/cookie";
 import { TIngredient } from "../../utils/types";
 
@@ -9,7 +11,6 @@ export const ORDER_SUCCESS = "ORDER_SUCCESS";
 export const ORDER_FAILED = "ORDER_FAILED";
 export const ORDER_CLOSE = "ORDER_CLOSE";
 
-const API_BASE_PATH = "https://norma.nomoreparties.space/api";
 const ORDER_METHOD_NAME = "/orders";
 
 export function createOrder(ingredients: Array<TIngredient>) {
@@ -18,7 +19,7 @@ export function createOrder(ingredients: Array<TIngredient>) {
       type: ORDER_INPROGRESS,
     });
 
-    fetch(API_BASE_PATH + ORDER_METHOD_NAME, {
+    requestWithCheckResponse(ORDER_METHOD_NAME, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -27,7 +28,6 @@ export function createOrder(ingredients: Array<TIngredient>) {
       },
       body: JSON.stringify({ ingredients: ingredients }),
     })
-      .then(checkResponse)
       .then((data) => {
         if (data.success) {
           dispatch({
@@ -50,27 +50,22 @@ export function getOrder(id: number) {
       type: ORDER_INPROGRESS,
     });
 
-    fetch(API_BASE_PATH + ORDER_METHOD_NAME + "/" + id)
-      .then(checkResponse)
-      .then((data) =>
-        {
-          if(data.success && data.orders && data.orders.length == 1)
-          {
-            dispatch({
-              type: ORDER_SUCCESS,
-              order: data.orders[0],
-            })
-          }
-          else {
-            dispatch({
-              type: ORDER_FAILED
-            });
-          }
+    requestWithCheckResponse(ORDER_METHOD_NAME + "/" + id)
+      .then((data) => {
+        if (data.success && data.orders && data.orders.length == 1) {
+          dispatch({
+            type: ORDER_SUCCESS,
+            order: data.orders[0],
+          });
+        } else {
+          dispatch({
+            type: ORDER_FAILED,
+          });
         }
-      )
+      })
       .catch((e) => {
         dispatch({
-          type: ORDER_FAILED
+          type: ORDER_FAILED,
         });
       });
   };
