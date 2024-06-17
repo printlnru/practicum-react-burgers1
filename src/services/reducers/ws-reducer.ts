@@ -10,7 +10,7 @@ import {
 type WsStore = {
   wsConnected: boolean;
   messages: TMessage | null;
-  error: string | null | WebSocketEventMap;
+  error: string | null | Event;
 };
 
 const initialState: WsStore = {

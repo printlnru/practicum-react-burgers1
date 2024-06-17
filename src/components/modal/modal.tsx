@@ -43,9 +43,3 @@ export const Modal: FC<TModal> = ({ onCloseHandle, children, header }) => {
         </>, modalRoot
     )
 }
-
-// Modal.propTypes = {
-//     onCloseHandle: PropTypes.func.isRequired,
-//     children: PropTypes.element.isRequired,
-//     header: PropTypes.string,
-// }

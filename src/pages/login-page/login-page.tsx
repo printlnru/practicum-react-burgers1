@@ -13,8 +13,8 @@ import { useAppDispatch, useAppSelector } from "../..";
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
-  const location = useLocation();
-  const navigate = useNavigate();
+  //const location = useLocation();
+  //const navigate = useNavigate();
   
 
   const { error } = useAppSelector((store) => store.auth);

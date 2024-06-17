@@ -64,6 +64,7 @@ export default function App() {
           <Routes location={background || location}>
             {/* главная страница, конструктор бургеров */}
             <Route path="/" element={<MainPage />} />
+
             {/* страница авторизации */}
             <Route
               path="/login"
@@ -120,7 +121,9 @@ export default function App() {
             )}
 
             {/* страница ленты заказов. Доступен всем пользователям */}
+
             <Route path="/feed" element={<FeedsPage />} />
+
             {/* страница заказа в ленте. Доступен всем пользователям */}
             {!background && (
               <Route path="/feed/:number" element={<FeedPage />} />
@@ -154,10 +157,8 @@ export default function App() {
             <Route path="*" element={<NotFound404 />} />
           </Routes>
           <Routes>
-          
             {background && (
               <>
-
                 {/* Модальное окно ингредиента */}
                 <Route
                   path="/ingredients/:id"
@@ -203,16 +204,6 @@ export default function App() {
         </main>
       </>
     );
-  };
-
-  const background = false;
-
-  const dispatch = useAppDispatch();
-
-  //const navigate = useNavigate();
-
-  const closeModalHandle = () => {
-    dispatch({ type: CURRENT_INGREDIENTS_UNLOAD });
   };
 
   return (

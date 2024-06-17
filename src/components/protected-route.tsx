@@ -11,14 +11,15 @@ interface IProtectedRouteElement {
 export const ProtectedRouteElement : React.FC<IProtectedRouteElement> = ({ element, onlyAuth }) => {
   const { login } = useAppSelector((store) => store.auth);
 
-  //const location = useLocation();
+  const location = useLocation();
+  const from = location.state?.from || '/';
 
   //Если страница только для вошедших и мы не вошли
-  if (onlyAuth && !login) return <Navigate to="/login" replace />;
+  if (onlyAuth && !login) return <Navigate to="/login"  state={{ from: location}} />;
 
   //Если страница только для не вошедших а мы вошли
   return !onlyAuth && login ? (
-    <Navigate to="/" replace />
+    <Navigate to={ from } />
   ) : (
     //иначе
     element
