@@ -154,10 +154,11 @@ export default function App() {
             <Route path="*" element={<NotFound404 />} />
           </Routes>
           <Routes>
+          
             {background && (
               <>
-                {" "}
-                /* Модальное окно ингредиента */
+
+                {/* Модальное окно ингредиента */}
                 <Route
                   path="/ingredients/:id"
                   element={
@@ -169,7 +170,7 @@ export default function App() {
                     </Modal>
                   }
                 />
-                /* Модальное окно заказа в ленте. Доступен всем пользователям */
+                {/* Модальное окно заказа в ленте. Доступен всем пользователям */}
                 <Route
                   path="/feed/:number"
                   element={
@@ -178,8 +179,7 @@ export default function App() {
                     </Modal>
                   }
                 />
-                /* Модальное окно заказа в истории заказов. Доступен только
-                авторизованным пользователям */
+                {/* Модальное окно заказа в истории заказов. Доступен только авторизованным пользователям */}
                 <Route
                   path="/profile/orders/:number"
                   element={
@@ -198,6 +198,7 @@ export default function App() {
                 />
               </>
             )}
+            <Route path="*" element={null} />
           </Routes>
         </main>
       </>

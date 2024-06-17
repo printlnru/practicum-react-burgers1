@@ -17,6 +17,10 @@ export type TIngredient = {
   type: string;
 };
 
+export type TIngredientWithCount = TIngredient & {
+  count: number
+}
+
 export type TIngredientWithUid = TIngredient & { uid: string };
 
 export type TForgotPassword = {
@@ -71,6 +75,9 @@ export type TOrder = {
   _id: string;
 };
 
+export type TGroupIngredientsOrder = TOrder & {
+  groupedIngredients : Array<TIngredientWithCount>;
+}
 
 
 export type TMessageOrder = {

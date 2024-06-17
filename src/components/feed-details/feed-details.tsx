@@ -1,6 +1,6 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useAppDispatch, useAppSelector } from "../..";
-import { TIngredient, TStatus } from "../../utils/types";
+import { TIngredient, TIngredientWithCount, TStatus } from "../../utils/types";
 import style from "./feed-details.module.css";
 import { useEffect, useState } from "react";
 
@@ -21,14 +21,14 @@ export const FeedDetails: React.FC = () => {
 
   const { ingredients } = useAppSelector((store) => store.ingredients);
 
-  const [orderIngredients, setOrderIngredients] = useState<TIngredient[]>([]);
-  const [price, setPrice] = useState(0);
+  const [orderIngredients, setOrderIngredients] = useState<
+    TIngredientWithCount[]
+  >([]);
 
   const arr = location.pathname.split("/");
   const str_id: string = arr[arr.length - 1];
 
   useEffect(() => {
-
     var id: number = +str_id;
     dispatch(getOrder(id));
   }, []);
@@ -36,6 +36,23 @@ export const FeedDetails: React.FC = () => {
   const { order, inProgress, failedStatus } = useAppSelector(
     (store) => store.order
   );
+
+  useEffect(() => {
+    if (order) {
+      let owc: TIngredientWithCount[] = [];
+      order.ingredients.forEach((i) => {
+        let id = String(i);
+        let ingr: TIngredient = IngredientId2IngredientMapper(id, ingredients);
+        let find = owc.find((e) => e._id === id);
+        if (find == undefined) {
+          owc.push({ ...ingr, count: 1 });
+        } else {
+          find.count++;
+        }
+      });
+      setOrderIngredients(owc);
+    }
+  }, [order]);
 
   if (failedStatus) {
     return (
@@ -69,13 +86,8 @@ export const FeedDetails: React.FC = () => {
             </p>
             <p className="text text_type_main-medium pt-15 pb-4">Состав:</p>
             <div className={style.orderScrollWrapper + " pr-2"}>
-              {Boolean(order.ingredients) &&
-                order.ingredients?.map((ingredientId, i) => {
-                  const ingredient_Id = String(ingredientId);
-                  const ingredient: TIngredient = IngredientId2IngredientMapper(
-                    ingredient_Id,
-                    ingredients
-                  );
+              {Boolean(orderIngredients) &&
+                orderIngredients?.map((ingredient, i) => {
                   return (
                     <div key={i} className={style.order + " mt-4 pb-2"}>
                       <div className={style.info}>
@@ -100,7 +112,11 @@ export const FeedDetails: React.FC = () => {
                           style.price + " text text_type_digits-default"
                         }
                       >
-                        <span className="pr-2">{ingredient.price}</span>
+                        <span className="pr-2">
+                          {ingredient.count > 1
+                            ? ingredient.count + " x " + ingredient.price
+                            : ingredient.price}
+                        </span>
                         <CurrencyIcon type="primary" />
                       </div>
                     </div>
