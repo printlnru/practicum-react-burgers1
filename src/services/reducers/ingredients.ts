@@ -17,10 +17,18 @@ const initialState : TState= {
   ingredientsRequest: false,
   ingredientsFailed: false,
   ingredients: [],
-  activeTab: "bun",
+  activeTab: 'bun',
 };
 
-export default function ingredients(state = initialState, action: any) {
+type TActiveTab = 'bun' | 'sauce' | 'main';
+
+type TActionType = {
+  type: string;
+  ingredients: Array<TIngredient>;
+  value: TActiveTab
+}
+
+export default function ingredients(state = initialState, action: TActionType) {
   switch (action.type) {
     case INGREDIENTS_LOADING: {
       return {

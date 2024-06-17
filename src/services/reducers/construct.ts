@@ -19,7 +19,14 @@ const initialState : TState = {
   ingredients: [],
 };
 
-export default function construct(state : TState = initialState, action: any) {
+type TActionType = {
+  type: 'CONSTRUCTOR_ADD_ITEM' | 'CONSTRUCTOR_DELETE_ITEM' | 'CONSTRUCTOR_RESORT' | 'ORDER_CLOSE';
+  item: TIngredient;
+  uid: string;
+  value: Array<TIngredientWithUid>;
+}
+
+export default function construct(state : TState = initialState, action: TActionType) {
   switch (action.type) {
     case CONSTRUCTOR_ADD_ITEM: {
       if (action.item.type === "bun")
@@ -43,7 +50,7 @@ export default function construct(state : TState = initialState, action: any) {
       return {
         ...state,
         ingredients: state.ingredients.filter(
-          (item: any) => item.uid !== action.uid
+          (item: TIngredientWithUid) => item.uid !== action.uid
         ),
       };
     }

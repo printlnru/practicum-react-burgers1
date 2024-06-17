@@ -15,7 +15,12 @@ const initialState: TState = {
   visible: false,
 };
 
-export default function currentIngredient(state = initialState, action: any) {
+type TActionType = {
+  type: string;
+  value: TIngredient;
+}
+
+export default function currentIngredient(state = initialState, action: TActionType) {
   switch (action.type) {
     case CURRENT_INGREDIENTS_LOAD: {
       return { ingredient: action.value, visible: true };
