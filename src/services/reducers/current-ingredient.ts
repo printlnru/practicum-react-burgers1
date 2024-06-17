@@ -16,7 +16,7 @@ const initialState: TState = {
 };
 
 type TActionType = {
-  type: string;
+  type: 'CURRENT_INGREDIENTS_LOAD' | 'CURRENT_INGREDIENTS_LOAD_AS_PAGE' | 'CURRENT_INGREDIENTS_UNLOAD';
   value: TIngredient;
 }
 

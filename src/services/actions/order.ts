@@ -1,4 +1,5 @@
 import { AppDispatch } from "../..";
+import { checkResponse } from "../../utils/check-response";
 import { getCookie } from "../../utils/cookie";
 import { TIngredient } from "../../utils/types";
 
@@ -26,12 +27,7 @@ export function createOrder(ingredients: Array<TIngredient>) {
       },
       body: JSON.stringify({ ingredients: ingredients }),
     })
-      .then((res) => {
-        if (res.ok) return res.json();
-        else {
-          return Promise.reject(`Error! Status code = ${res.status}`);
-        }
-      })
+      .then(checkResponse)
       .then((data) => {
         if (data.success) {
           dispatch({
@@ -55,10 +51,7 @@ export function getOrder(id: number) {
     });
 
     fetch(API_BASE_PATH + ORDER_METHOD_NAME + "/" + id)
-      .then((res) => {
-        if (res.ok) return res.json();
-        else return Promise.reject(`Error! Status code = ${res.status}`);
-      })
+      .then(checkResponse)
       .then((data) =>
         {
           if(data.success && data.orders && data.orders.length == 1)

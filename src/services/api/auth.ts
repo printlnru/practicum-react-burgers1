@@ -9,6 +9,7 @@ import {
   TResetPassword,
   TUpdateUser,
 } from "../../utils/types";
+import { checkResponse } from "../../utils/check-response";
 
 const LOGIN_METHOD_NAME = "/auth/login";
 const LOGOUT_METHOD_NAME = "/auth/logout";
@@ -43,13 +44,7 @@ const refreshToken = () => {
     },
     body: JSON.stringify({ token }),
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(res.status);
-      }
-    })
+    .then(checkResponse)
     .then((res) => {
       if (res && res.success) {
         let accessToken = res.accessToken.split("Bearer ")[1];
@@ -134,13 +129,7 @@ export const loginReq = ({ email, password }: TLogin) => {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(res.status);
-      }
-    })
+    .then(checkResponse)
     .then((res) => {
       if (res && res.success) {
         let accessToken = res.accessToken.split("Bearer ")[1];
@@ -194,13 +183,7 @@ export const resetPasswordReq = ({ password, token }: TResetPassword) => {
       "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({ password, token }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(res.status);
-    }
-  });
+  }).then(checkResponse);
 };
 
 export const getUserInfoReq = () => {

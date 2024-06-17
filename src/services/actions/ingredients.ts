@@ -1,4 +1,5 @@
 import { AppDispatch } from "../..";
+import { checkResponse } from "../../utils/check-response";
 
 export const INGREDIENTS_LOADING = "INGREDIENTS_LOADING";
 export const INGREDIENTS_LOAD_SUCCESS = "INGREDIENTS_LOAD_SUCCESS";
@@ -16,10 +17,7 @@ export function getIngredients() {
     });
 
     fetch(API_BASE_PATH + INGREDIENTS_METHOD_NAME)
-      .then((res) => {
-        if (res.ok) return res.json();
-        else return Promise.reject(`Error! Status code = ${res.status}`);
-      })
+      .then(checkResponse)
       .then((data) =>
         dispatch({
           type: INGREDIENTS_LOAD_SUCCESS,
