@@ -23,7 +23,7 @@ export const FeedItem: React.FC<TFeedItem> = ({ order, showStatus }) => {
         pathname: `${location.pathname}/${order.number}`,
       }}
       className={style.link}
-      state={{background: true}}
+      state={{background: location}}
     >
       <div className={style.order}>
         <div className={style.header}>
