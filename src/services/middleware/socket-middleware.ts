@@ -1,11 +1,10 @@
 import { Dispatch, Middleware, MiddlewareAPI } from "redux";
 import { AppDispatch, RootState } from "../..";
 import { TMessage } from "../../utils/types";
-import * as anName from "../actions/ws-actions";
-import { TWsActions } from "../actions/ws-actions";
 
-//export const socketMiddleware = (wsActions: TWsActions): Middleware => {
-export const socketMiddleware: Middleware =
+import { TWsActionNames, TWsActions } from "../actions/ws-actions";
+
+export const socketMiddleware = (anName: TWsActionNames) : Middleware => 
   (store: MiddlewareAPI<Dispatch<TWsActions>, RootState>) =>
   (next: (action: unknown) => unknown) =>
   (action: unknown): unknown => {
