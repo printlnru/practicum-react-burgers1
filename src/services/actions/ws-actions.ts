@@ -18,7 +18,7 @@ export type CloseAction = {
 
 export type ErrorAction = {
   type: typeof WS_CONNECTION_ERROR;
-  payload: Event;
+  payload: Event | null | string;
 };
 
 export type SuccessAction = {

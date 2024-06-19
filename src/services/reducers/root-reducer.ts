@@ -12,5 +12,5 @@ export default combineReducers({
   currentIngredient, //объект текущего просматриваемого ингредиента
   order, //объект созданного заказа
   auth,
-  wsReducer
+  wsReducer //WebSocket
 });

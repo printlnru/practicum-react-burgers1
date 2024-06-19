@@ -1,5 +1,17 @@
 import { TWsActions } from "../services/actions/ws-actions";
 
+
+export const TIngredientBunType : "bun" = "bun";
+export const TIngredientSauceType : "sauce" = "sauce";
+export const TIngredientMainType : "main" = "main";
+
+export const TActiveTabBunType : "bun" = "bun";
+export const TActiveTabSauceType : "sauce" = "sauce";
+export const TActiveTabMainType : "main" = "main";
+
+export type TIngredientType =  typeof TIngredientBunType | typeof TIngredientSauceType | typeof TIngredientMainType;
+export type TActiveTab = typeof TActiveTabBunType | typeof TActiveTabSauceType | typeof TActiveTabMainType;
+
 export type TIngredient = {
   _id: string;
 
@@ -14,7 +26,7 @@ export type TIngredient = {
   name: string;
   price: number;
   proteins: number;
-  type: string;
+  type: TIngredientType;
 };
 
 export type TIngredientWithCount = TIngredient & {
