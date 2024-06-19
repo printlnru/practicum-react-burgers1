@@ -34,13 +34,6 @@ export default function LoginPage() {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(loginAct(state));
-    //console.log(location);
-    //console.log(location.state);
-    //console.log(location.state?.from);
-    //console.log(location.state?.from?.pathname);
-    
-    //navigate(location.state?.from?.pathname || '/')
-
   };
 
   return (
@@ -57,6 +50,7 @@ export default function LoginPage() {
             value={state.email}
             onPointerEnterCapture={undefined}
             onPointerLeaveCapture={undefined}
+            data-cy="auth_input_login"
           />
         </div>
 
@@ -65,10 +59,11 @@ export default function LoginPage() {
             onChange={handleChange}
             name={"password"}
             value={state.password}
+            data-cy="auth_input_password"
           />
         </div>
 
-        <Button htmlType="submit" size="medium">
+        <Button htmlType="submit" size="medium" data-cy="auth_btn_submit">
           Войти
         </Button>
 

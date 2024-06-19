@@ -61,7 +61,7 @@ export default function TotalBlock() {
             <span className="text text_type_digits-medium">{totalCost}</span>
 
             <div className={style.currencyicon} ><CurrencyIcon type="primary" /></div>
-            <Button disabled={disabledButton} onClick={onClickBtn} htmlType="button" type="primary" size="large" extraClass="ml-10">{
+            <Button disabled={disabledButton} onClick={onClickBtn} htmlType="button" type="primary" size="large" extraClass="ml-10" data-cy="main_order_btn_submit">{
                 disabledButton ? 'Выбери булочку и что-нибудь ещё' : 'Оформить заказ'
             }</Button>
 
