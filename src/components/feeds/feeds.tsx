@@ -33,7 +33,7 @@ export const Feeds : React.FC = () => {
   useEffect(() => {
     if (messages != null) {
       setOrders(
-        messages.orders.map((origin) => MessageOrder2OrderMapper(origin,ingredients))
+        messages.orders.map((origin) => MessageOrder2OrderMapper(origin,ingredients??[]))
       );
     } else {
       setOrders([]);

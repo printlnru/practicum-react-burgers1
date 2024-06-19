@@ -30,7 +30,7 @@ export default function TotalBlock() {
         //const ingridientsCost : number = ingredients.reduce((a : number, b : TIngredient) => a as number + ( (b as TIngredient).price),0);
         var ingridientsCost : number = 0;
         ingredients.forEach(e   => {
-            ingridientsCost += e.price;
+            ingridientsCost += e.price??0;
         });
         return doubleBunCost + ingridientsCost;
     }, [bun, ingredients])

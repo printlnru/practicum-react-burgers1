@@ -78,6 +78,7 @@ describe("test construct reducer", () => {
     const received = construct({...initialState, ingredients: [testAddItemSauceWithUid]}, {
       type: T.CONSTRUCTOR_DELETE_ITEM,
       uid: "123456789",
+      item: testAddItemBun
     });
     expect(received).toEqual(expected);
   });
@@ -92,6 +93,7 @@ describe("test construct reducer", () => {
     const received = construct({...initialState, ingredients: [testAddItemSauceWithUid]}, {
       type: T.CONSTRUCTOR_RESORT,
       value: [testAddItemSauceWithUid, testAddItemMainWithUid],
+      item: testAddItemBun
     });
     expect(received).toEqual(expected);
   });

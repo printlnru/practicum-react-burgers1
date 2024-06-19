@@ -21,7 +21,7 @@ const initialState : TState = {
 
 type TActionType = {
   type: 'CONSTRUCTOR_ADD_ITEM' | 'CONSTRUCTOR_DELETE_ITEM' | 'CONSTRUCTOR_RESORT' | 'ORDER_CLOSE';
-  item?: TIngredient;
+  item: TIngredient;
   uid?: string;
   value?: Array<TIngredientWithUid>;
 }
