@@ -1,6 +1,6 @@
 describe("test ingredient detail", function () {
-  before("should be available on localhost:3000", function () {
-    cy.visit("http://localhost:3000");
+  before("should be available on baseUrl", function () {
+    cy.visit("/");
   });
 
   it("click first ingredient and click modal close btn", function () {
