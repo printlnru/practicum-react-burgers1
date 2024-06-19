@@ -1,8 +1,6 @@
 import { FC, useEffect } from "react";
 import style from "./ingredient-details.module.css";
-import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { getIngredients } from "../../services/actions/ingredients";
 import { CURRENT_INGREDIENTS_LOAD_AS_PAGE } from "../../services/actions/current-ingredient";
 
 import {TIngredient} from "../../utils/types";
@@ -17,13 +15,6 @@ export const IngredientDetails : FC = () => {
   const location = useLocation();
 
   const id = location.pathname.split("/")[2];
-
-  useEffect(() => {
-    if (!data) {
-      dispatch(getIngredients());
-    } else {
-    }
-  }, []);
 
   useEffect(() => {
     if (!data) {

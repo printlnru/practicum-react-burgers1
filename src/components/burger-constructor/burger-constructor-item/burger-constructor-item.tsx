@@ -8,8 +8,8 @@ import style from "./burger-constructor-item.module.css";
 
 import { CONSTRUCTOR_DELETE_ITEM } from "../../../services/actions/constructor";
 
-import { useDispatch } from "react-redux";
 import { TMoveCardCallback, TIngredientWithUid, TUseDropHover } from "../../../utils/types";
+import { useAppDispatch } from "../../..";
 
 interface IMovieProps {
   item: TIngredientWithUid;
@@ -23,7 +23,7 @@ export const BurgerConstructorItem: React.FC<IMovieProps> = ({
   index,
   moveCard,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onDelete = () => {
     dispatch({

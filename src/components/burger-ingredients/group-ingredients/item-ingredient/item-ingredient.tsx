@@ -11,7 +11,6 @@ import {
 
 import style from "./item-ingredient.module.css";
 
-import { useSelector, useDispatch } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../../../..";
 import { TIngredient } from "../../../../utils/types";
 

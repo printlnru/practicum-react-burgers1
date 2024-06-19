@@ -42,11 +42,11 @@ export default function TotalBlock() {
 
         else {
             const value = []
-            value.push(bun._id);
+            value.push(bun);
             ingredients.forEach(e => {
                 value.push(e._id);
             });
-            value.push(bun._id);
+            value.push(bun);
 
             dispatch({ type: ORDER_CREATE, ingredients:value })
         }

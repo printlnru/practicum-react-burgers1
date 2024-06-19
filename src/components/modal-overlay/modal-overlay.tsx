@@ -12,7 +12,3 @@ export const ModalOverlay : FC<TModalOverlay> = ({ onCloseHandle }) => {
         </div>
     )
 }
-
-// ModalOverlay.propTypes = {
-//     onCloseHandle: PropTypes.func.isRequired
-// }

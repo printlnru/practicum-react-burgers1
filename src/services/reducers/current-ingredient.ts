@@ -15,7 +15,12 @@ const initialState: TState = {
   visible: false,
 };
 
-export default function currentIngredient(state = initialState, action: any) {
+type TActionType = {
+  type: 'CURRENT_INGREDIENTS_LOAD' | 'CURRENT_INGREDIENTS_LOAD_AS_PAGE' | 'CURRENT_INGREDIENTS_UNLOAD';
+  value: TIngredient;
+}
+
+export default function currentIngredient(state = initialState, action: TActionType) {
   switch (action.type) {
     case CURRENT_INGREDIENTS_LOAD: {
       return { ingredient: action.value, visible: true };

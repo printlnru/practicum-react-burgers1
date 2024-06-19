@@ -9,6 +9,7 @@ import {
   TResetPassword,
   TUpdateUser,
 } from "../../utils/types";
+import { requestWithCheckResponse } from "../../utils/check-response";
 
 const LOGIN_METHOD_NAME = "/auth/login";
 const LOGOUT_METHOD_NAME = "/auth/logout";
@@ -36,20 +37,14 @@ const clearToken = () => {
 
 const refreshToken = () => {
   const token = localStorage.getItem("refreshToken");
-  return fetch(API_BASE_PATH + REFRESH_TOKEN_METHOD_NAME, {
+  return requestWithCheckResponse(REFRESH_TOKEN_METHOD_NAME, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({ token }),
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(res.status);
-      }
-    })
+    
     .then((res) => {
       if (res && res.success) {
         let accessToken = res.accessToken.split("Bearer ")[1];
@@ -69,12 +64,6 @@ const refreshToken = () => {
 };
 
 const shouldRefreshToken = (error: any) => {
-
-  console.log("error:");
-  console.log(error);
-  
-  
-
   var rv =
     error.response.status === 403 &&
     error.body.success === false &&
@@ -133,20 +122,13 @@ export const registrationReq = ({ email, password, name }: TUpdateUser) => {
 };
 
 export const loginReq = ({ email, password }: TLogin) => {
-  return fetch(API_BASE_PATH + LOGIN_METHOD_NAME, {
+  return requestWithCheckResponse(LOGIN_METHOD_NAME, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({ email, password }),
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(res.status);
-      }
-    })
     .then((res) => {
       if (res && res.success) {
         let accessToken = res.accessToken.split("Bearer ")[1];
@@ -194,18 +176,12 @@ export const forgotPasswordReq = ({ email }: TForgotPassword) => {
 };
 
 export const resetPasswordReq = ({ password, token }: TResetPassword) => {
-  return fetch(API_BASE_PATH + RESET_PASSWORD_METHOD_NAME, {
+  return requestWithCheckResponse( RESET_PASSWORD_METHOD_NAME, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({ password, token }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(res.status);
-    }
   });
 };
 

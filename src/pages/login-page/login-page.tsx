@@ -4,7 +4,7 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { loginAct } from "../../services/actions/auth";
 
@@ -13,6 +13,9 @@ import { useAppDispatch, useAppSelector } from "../..";
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
+  //const location = useLocation();
+  //const navigate = useNavigate();
+  
 
   const { error } = useAppSelector((store) => store.auth);
 
@@ -31,6 +34,13 @@ export default function LoginPage() {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(loginAct(state));
+    //console.log(location);
+    //console.log(location.state);
+    //console.log(location.state?.from);
+    //console.log(location.state?.from?.pathname);
+    
+    //navigate(location.state?.from?.pathname || '/')
+
   };
 
   return (

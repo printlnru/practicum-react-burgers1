@@ -9,6 +9,9 @@ import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password
 import ResetPasswordPage from "../../pages/reset-password-page/reset-password-page";
 import ProfilePage from "../../pages/profile-page/profile-page";
 
+import FeedsPage from "../../pages/feeds-page/feeds-page";
+import FeedPage from "../../pages/feed-page/feed-page";
+
 import OrdersPage from "../../pages/orders-page/orders-page";
 import OrderPage from "../../pages/order-page/order-page";
 
@@ -20,12 +23,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { ProtectedRouteElement } from "../protected-route";
 
-import {Modal} from "../modal/modal";
-import {IngredientDetails} from "../ingredient-details/ingredient-details" ;
+import { Modal } from "../modal/modal";
+import { IngredientDetails } from "../ingredient-details/ingredient-details";
 
 import { CURRENT_INGREDIENTS_UNLOAD } from "../../services/actions/current-ingredient";
-import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FeedDetails } from "../feed-details/feed-details";
+import { useAppDispatch } from "../..";
+import { useEffect } from "react";
+import { getIngredients } from "../../services/actions/ingredients";
 
 export default function App() {
   const Wrapper = () => {
@@ -33,22 +39,32 @@ export default function App() {
     const locationState = location.state;
     const background = locationState && locationState.background;
 
-
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+      dispatch(getIngredients());
+    }, []);
 
     const closeModalHandle = () => {
       dispatch({ type: CURRENT_INGREDIENTS_UNLOAD });
       navigate("/");
     };
 
+    const closeFeedModalHandle = () => {
+      navigate("/feed");
+    };
+    const closeProfileOrdersModalHandle = () => {
+      navigate("/profile/orders");
+    };
     return (
       <>
         <AppHeader />
         <main className={style.parent}>
-          <Routes>
+          <Routes location={background || location}>
             {/* главная страница, конструктор бургеров */}
             <Route path="/" element={<MainPage />} />
+
             {/* страница авторизации */}
             <Route
               path="/login"
@@ -104,58 +120,90 @@ export default function App() {
               <Route path="/ingredients/:id" element={<IngredientPage />} />
             )}
 
-            {/* Модальное окно ингредиента */}
-            {background && (
-              <Route
-                path="/ingredients/:id"
-                element={
-                  <Modal
-                    onCloseHandle={closeModalHandle}
-                    header="Детали ингредиента"
-                  >
-                    <IngredientDetails />
-                  </Modal>
-                }
-              />
+            {/* страница ленты заказов. Доступен всем пользователям */}
+
+            <Route path="/feed" element={<FeedsPage />} />
+
+            {/* страница заказа в ленте. Доступен всем пользователям */}
+            {!background && (
+              <Route path="/feed/:number" element={<FeedPage />} />
             )}
 
-            {/* История заказов */}
+            {/* страница истории заказов пользователя. Доступен только авторизованным пользователям */}
             <Route
               path="/profile/orders"
               element={
                 <ProtectedRouteElement
-                  onlyAuth={false}
+                  onlyAuth={true}
                   element={<OrdersPage />}
                 />
               }
             />
-            {/* Истории заказа */}
-            <Route
-              path="/profile/orders/:number"
-              element={
-                <ProtectedRouteElement
-                  onlyAuth={false}
-                  element={<OrderPage />}
-                />
-              }
-            />
+            {/* страница заказа в истории заказов. Доступен только авторизованным пользователям */}
+
+            {!background && (
+              <Route
+                path="/profile/orders/:number"
+                element={
+                  <ProtectedRouteElement
+                    onlyAuth={true}
+                    element={<OrderPage />}
+                  />
+                }
+              />
+            )}
 
             {/* 404 */}
             <Route path="*" element={<NotFound404 />} />
           </Routes>
+          <Routes>
+            {background && (
+              <>
+                {/* Модальное окно ингредиента */}
+                <Route
+                  path="/ingredients/:id"
+                  element={
+                    <Modal
+                      onCloseHandle={closeModalHandle}
+                      header="Детали ингредиента"
+                    >
+                      <IngredientDetails />
+                    </Modal>
+                  }
+                />
+                {/* Модальное окно заказа в ленте. Доступен всем пользователям */}
+                <Route
+                  path="/feed/:number"
+                  element={
+                    <Modal onCloseHandle={closeFeedModalHandle} header="">
+                      <FeedDetails />
+                    </Modal>
+                  }
+                />
+                {/* Модальное окно заказа в истории заказов. Доступен только авторизованным пользователям */}
+                <Route
+                  path="/profile/orders/:number"
+                  element={
+                    <ProtectedRouteElement
+                      onlyAuth={true}
+                      element={
+                        <Modal
+                          onCloseHandle={closeProfileOrdersModalHandle}
+                          header=""
+                        >
+                          <FeedDetails />
+                        </Modal>
+                      }
+                    />
+                  }
+                />
+              </>
+            )}
+            <Route path="*" element={null} />
+          </Routes>
         </main>
       </>
     );
-  };
-
-  const background = false;
-
-  const dispatch = useDispatch();
-
-  //const navigate = useNavigate();
-
-  const closeModalHandle = () => {
-    dispatch({ type: CURRENT_INGREDIENTS_UNLOAD });
   };
 
   return (
