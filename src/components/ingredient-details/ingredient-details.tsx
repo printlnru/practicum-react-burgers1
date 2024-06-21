@@ -18,8 +18,10 @@ export const IngredientDetails : FC = () => {
 
   useEffect(() => {
     if (!data) {
-      var item = ingredients.find((e:TIngredient) => e._id == id);
-      dispatch({ type: CURRENT_INGREDIENTS_LOAD_AS_PAGE, value: item });
+      if(ingredients){
+        var item = ingredients.find((e:TIngredient) => e._id == id);
+        dispatch({ type: CURRENT_INGREDIENTS_LOAD_AS_PAGE, value: item });
+      }  
     }
   }, [ingredients]);
 

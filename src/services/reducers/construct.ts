@@ -9,7 +9,7 @@ import {
 import { ORDER_CLOSE } from "../actions/order";
 import { TIngredient, TIngredientWithUid } from "../../utils/types";
 
-type TState = {
+export type TState = {
   bun: TIngredient | null;
   ingredients: Array<TIngredientWithUid>
 }
@@ -22,14 +22,14 @@ const initialState : TState = {
 type TActionType = {
   type: 'CONSTRUCTOR_ADD_ITEM' | 'CONSTRUCTOR_DELETE_ITEM' | 'CONSTRUCTOR_RESORT' | 'ORDER_CLOSE';
   item: TIngredient;
-  uid: string;
-  value: Array<TIngredientWithUid>;
+  uid?: string;
+  value?: Array<TIngredientWithUid>;
 }
 
 export default function construct(state : TState = initialState, action: TActionType) {
   switch (action.type) {
     case CONSTRUCTOR_ADD_ITEM: {
-      if (action.item.type === "bun")
+      if (action.item?.type === "bun")
         return {
           ...state,
           bun: action.item,
@@ -57,7 +57,7 @@ export default function construct(state : TState = initialState, action: TAction
     case CONSTRUCTOR_RESORT: {
       return {
         ...state,
-        ingredients: [...action.value],
+        ingredients: [...action.value??[]],
       };
     }
 

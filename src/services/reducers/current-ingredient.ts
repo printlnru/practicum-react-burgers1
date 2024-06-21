@@ -5,7 +5,7 @@ import {
   CURRENT_INGREDIENTS_UNLOAD,
 } from "../actions/current-ingredient";
 
-type TState = {
+export type TState = {
   ingredient: TIngredient | null;
   visible: boolean;
 };
@@ -17,7 +17,7 @@ const initialState: TState = {
 
 type TActionType = {
   type: 'CURRENT_INGREDIENTS_LOAD' | 'CURRENT_INGREDIENTS_LOAD_AS_PAGE' | 'CURRENT_INGREDIENTS_UNLOAD';
-  value: TIngredient;
+  value?: TIngredient;
 }
 
 export default function currentIngredient(state = initialState, action: TActionType) {

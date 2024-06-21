@@ -7,7 +7,7 @@ import {
   ORDER_CLOSE,
 } from "../actions/order";
 
-type TState = {
+export type TState = {
   ingredients: Array<TIngredient>,
   inProgress: boolean,
   successStatus: boolean,

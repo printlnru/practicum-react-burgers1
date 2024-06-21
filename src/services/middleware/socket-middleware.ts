@@ -1,5 +1,5 @@
 import { Dispatch, Middleware, MiddlewareAPI } from "redux";
-import { AppDispatch, RootState } from "../..";
+import { RootState } from "../..";
 import { TMessage } from "../../utils/types";
 
 import { TWsActionNames, TWsActions } from "../actions/ws-actions";
@@ -10,7 +10,7 @@ export const socketMiddleware = (anName: TWsActionNames) : Middleware =>
   (action: unknown): unknown => {
     let socket: WebSocket | null = null;
 
-    const { dispatch, getState } = store;
+    const { dispatch } = store;
     const action1 = action as TWsActions;
 
     const { type } = action1;

@@ -7,7 +7,7 @@ import {
   WS_GET_MESSAGE,
 } from "../actions/ws-actions";
 
-type WsStore = {
+export type WsStore = {
   wsConnected: boolean;
   messages: TMessage | null;
   error: string | null | Event;

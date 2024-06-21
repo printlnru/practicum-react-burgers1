@@ -37,7 +37,7 @@ export default function OrdersPage() {
     if (messages != null) {
       setOrders(
         messages.orders.map((origin) =>
-          MessageOrder2OrderMapper(origin, ingredients)
+          MessageOrder2OrderMapper(origin, ingredients??[])
         )
       );
     } else {

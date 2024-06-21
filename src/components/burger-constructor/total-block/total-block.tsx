@@ -30,7 +30,7 @@ export default function TotalBlock() {
         //const ingridientsCost : number = ingredients.reduce((a : number, b : TIngredient) => a as number + ( (b as TIngredient).price),0);
         var ingridientsCost : number = 0;
         ingredients.forEach(e   => {
-            ingridientsCost += e.price;
+            ingridientsCost += e.price??0;
         });
         return doubleBunCost + ingridientsCost;
     }, [bun, ingredients])
@@ -61,7 +61,7 @@ export default function TotalBlock() {
             <span className="text text_type_digits-medium">{totalCost}</span>
 
             <div className={style.currencyicon} ><CurrencyIcon type="primary" /></div>
-            <Button disabled={disabledButton} onClick={onClickBtn} htmlType="button" type="primary" size="large" extraClass="ml-10">{
+            <Button disabled={disabledButton} onClick={onClickBtn} htmlType="button" type="primary" size="large" extraClass="ml-10" data-cy="main_order_btn_submit">{
                 disabledButton ? 'Выбери булочку и что-нибудь ещё' : 'Оформить заказ'
             }</Button>
 

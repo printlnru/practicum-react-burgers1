@@ -91,7 +91,7 @@ export default function BurgerConstructor() {
       {/* filling (with scroll) */}
       {/* не понятно как сделать скролл как в макете */}
       <ul className={style.ulstyle}>
-        {ingredients?.map(renderCard)}
+        {ingredients && ingredients.map(renderCard)}
         {!ingredients && (
           <li className={style.item}>
             <DragIcon type="primary" />

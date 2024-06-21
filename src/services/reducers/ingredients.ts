@@ -1,4 +1,4 @@
-import { TIngredient } from "../../utils/types";
+import { TActiveTab, TActiveTabBunType, TIngredient } from "../../utils/types";
 import {
   INGREDIENTS_LOADING,
   INGREDIENTS_LOAD_SUCCESS,
@@ -6,26 +6,26 @@ import {
   INGREDIENTS_CHANGE_ACTIVE_TAB,
 } from "../actions/ingredients";
 
-type TState = {
+export type TState = {
   ingredientsRequest: boolean;
   ingredientsFailed: boolean;
   ingredients: Array<TIngredient>;
-  activeTab: string;
+  activeTab: TActiveTab;
 }
 
 const initialState : TState= {
   ingredientsRequest: false,
   ingredientsFailed: false,
   ingredients: [],
-  activeTab: 'bun',
+  activeTab: TActiveTabBunType,
 };
 
-type TActiveTab = 'bun' | 'sauce' | 'main';
+
 
 type TActionType = {
   type: string;
-  ingredients: Array<TIngredient>;
-  value: TActiveTab
+  ingredients?: Array<TIngredient>;
+  value?: TActiveTab
 }
 
 export default function ingredients(state = initialState, action: TActionType) {

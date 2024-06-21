@@ -17,25 +17,27 @@ import {
 import { getCookie } from "../../utils/cookie";
 import { TUser } from "../../utils/types";
 
-type TState = {
+export type TState = {
   error: boolean;
   login: boolean;
   user: TUser;
-}
+};
 
-const initialState : TState = {
+const emptyUser: TUser = {
+  name: "",
+  email: "",
+};
+
+const initialState: TState = {
   error: false,
   login: !!getCookie("token"),
-  user: {
-    name: "",
-    email: "",
-  },
+  user: emptyUser,
 };
 
 type TActionType = {
   type: string;
   user: TUser;
-}
+};
 
 export default function auth(state = initialState, action: TActionType) {
   switch (action.type) {
@@ -74,7 +76,7 @@ export default function auth(state = initialState, action: TActionType) {
     }
     case AUTH_LOGIN_FAILED: {
       return {
-        ...state,
+        user: emptyUser,
         error: true,
         login: false,
       };
@@ -84,10 +86,7 @@ export default function auth(state = initialState, action: TActionType) {
         ...state,
         error: false,
         login: false,
-        user: {
-          name: "",
-          email: "",
-        },
+        user: emptyUser,
       };
     }
     case AUTH_GET_USER_IN_PROGRESS: {

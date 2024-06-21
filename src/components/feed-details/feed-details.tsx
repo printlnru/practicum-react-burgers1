@@ -42,7 +42,7 @@ export const FeedDetails: React.FC = () => {
       let owc: TIngredientWithCount[] = [];
       order.ingredients.forEach((i) => {
         let id = String(i);
-        let ingr: TIngredient = IngredientId2IngredientMapper(id, ingredients);
+        let ingr: TIngredient = IngredientId2IngredientMapper(id, ingredients??[]);
         let find = owc.find((e) => e._id === id);
         if (find == undefined) {
           owc.push({ ...ingr, count: 1 });
@@ -134,7 +134,7 @@ export const FeedDetails: React.FC = () => {
                       const ingredient_Id = String(ingredientId);
                       return IngredientId2IngredientMapper(
                         ingredient_Id,
-                        ingredients
+                        ingredients??[]
                       );
                     })
                   )}
